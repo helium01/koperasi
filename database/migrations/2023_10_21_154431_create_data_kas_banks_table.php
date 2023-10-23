@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("deskripsi");
             $table->string("ubl");//upah bahan lain lain
             $table->integer("jumlah_uang");
+            $table->string("created_by");
             $table->timestamps();
         });
     }

@@ -17,5 +17,6 @@ class data_kas_bank extends Model
         'deskripsi',
         'ubl',
         'jumlah_uang',
+        'created_by',
     ];
 }

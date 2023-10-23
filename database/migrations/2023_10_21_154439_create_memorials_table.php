@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("ubl");//upah bahan lain lain
             $table->integer("jumlah_uang");
             $table->integer("jenis");//debit kredit
+            $table->string("created_by");//debit kredit
             $table->timestamps();
         });
     }

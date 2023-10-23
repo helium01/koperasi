@@ -13,5 +13,6 @@ class saldo_awal extends Model
         'nama_perkiraan',
         'jensi',
         'saldo_awal',
+        'created_by',
     ];
 }

@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 
 class MemorialController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $memorials = Memorial::all();
-        return view('memorials.index', compact('memorials'));
+        return view('admin.masukan_data_harian.koreksi_data_memorial.index', compact('memorials'));
     }
 
     public function create()
     {
-        return view('memorials.create');
+        return view('admin.masukan_data_harian.koreksi_data_memorial.create');
     }
 
     public function store(Request $request)
@@ -31,7 +35,7 @@ class MemorialController extends Controller
 
     public function edit(Memorial $memorial)
     {
-        return view('memorials.edit', compact('memorial'));
+        return view('admin.masukan_data_harian.koreksi_data_memorial.edit', compact('memorial'));
     }
 
     public function update(Request $request, Memorial $memorial)

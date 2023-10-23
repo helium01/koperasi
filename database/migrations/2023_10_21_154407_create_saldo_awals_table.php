@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("nama_perkiraan");
             $table->string("jensi");//debit atau kredit
             $table->string("saldo_awal");
+            $table->string("created_by");
             $table->timestamps();
         });
     }

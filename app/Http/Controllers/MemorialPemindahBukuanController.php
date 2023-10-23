@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 class MemorialPemindahBukuanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view("admin.cetak.memorial_pemindah_bukuan.pemindah_bukuan");
     }
 
     /**

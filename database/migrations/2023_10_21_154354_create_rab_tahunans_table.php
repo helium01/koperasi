@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string("rab_oktober");
             $table->string("rab_november");
             $table->string("rab_desember");
+            $table->string("created_by");
             $table->timestamps();
         });
     }

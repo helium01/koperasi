@@ -24,5 +24,6 @@ class rab_tahunan extends Model
         'rab_oktober',
         'rab_november',
         'rab_desember',
+        'created_by',
     ];
 }

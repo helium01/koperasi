@@ -40,6 +40,13 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/nomor_perkiraans">
+                                <i class="far fa-file-alt"></i>
+                                Nomor Perkiraan
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
 
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -50,8 +57,8 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Isi RAB Tahun Ini</a>
-                                <a class="dropdown-item" href="#">Isi Proses Saldo Awal</a>
+                                <a class="dropdown-item" href="/rab_tahunans">Isi RAB Tahun Ini</a>
+                                <a class="dropdown-item" href="/saldo_awals">Isi Proses Saldo Awal</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -64,10 +71,10 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Masukan Data Kas/Bank</a>
-                                <a class="dropdown-item" href="#">Masukan Koreksi Data Memorial</a>
-                                <a class="dropdown-item" href="#">Masukan Koreksi Data Memo Suplement</a>
-                                <a class="dropdown-item" href="#">Masukan Koreksi Data Memo Penutup</a>
+                                <a class="dropdown-item" href="/data_kas_banks">Masukan Data Kas/Bank</a>
+                                <a class="dropdown-item" href="/memorials">Masukan Koreksi Data Memorial</a>
+                                <a class="dropdown-item" href="/suplements">Masukan Koreksi Data Memo Suplement</a>
+                                <a class="dropdown-item" href="/penutups">Masukan Koreksi Data Memo Penutup</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -80,24 +87,30 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Lembar Pemeriksaan</a>
-                                <a class="dropdown-item" href="#">Buku Besar/Sub Buku Besar</a>
-                                <a class="dropdown-item" href="#">Seluruh Kartu Buku Besar</a>
-                                <a class="dropdown-item" href="#">NERACA</a>
-                                <a class="dropdown-item" href="#">Memorial Pemindah Bukuan</a>
-                                <a class="dropdown-item" href="#">Saldo Awal</a>
-                                <a class="dropdown-item" href="#">Neraca Lajur</a>
-                                <a class="dropdown-item" href="#">Neraca Aktifa Pasifa</a>
-                                <a class="dropdown-item" href="#">Laba Rugi</a>
+                                <a class="dropdown-item" href="cetak/lembar_pemeriksaan">Lembar Pemeriksaan</a>
+                                <a class="dropdown-item" href="cetak/buku_besar/no_perkiraan">Buku Besar/Sub Buku Besar</a>
+                                <a class="dropdown-item" href="cetak/seluruh_kartu_bukubesar">Seluruh Kartu Buku Besar</a>
+                                <a class="dropdown-item" href="cetak/neraca">NERACA</a>
+                                <a class="dropdown-item" href="/cetak/memorial_pemindah_bukuan">Memorial Pemindah Bukuan</a>
+                                <a class="dropdown-item" href="/cetak/memorial_saldo_awal">Saldo Awal</a>
+                                <a class="dropdown-item" href="/cetak/neraca_lajur">Neraca Lajur</a>
+                                <a class="dropdown-item" href="/cetak/neraca_aktifa_pasifa">Neraca Aktifa Pasifa</a>
+                                <a class="dropdown-item" href="/cetak_laba_rugi">Laba Rugi</a>
                             </div>
                         </li>
 
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href="login.html">
+                            <a class="nav-link d-block" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
                                 Admin, <b>Logout</b>
                             </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                         </li>
                     </ul>
                 </div>

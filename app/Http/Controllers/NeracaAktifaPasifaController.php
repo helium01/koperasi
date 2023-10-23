@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 class NeracaAktifaPasifaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view("admin.cetak.neraca_aktifa_pasifa.neraca");
     }
 
     /**

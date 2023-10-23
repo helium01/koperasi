@@ -16,5 +16,6 @@ class memorial extends Model
         'ubl',
         'jumlah_uang',
         'jenis',
+        'created_by',
     ];
 }

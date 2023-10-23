@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 
 class PenutupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $penutups = Penutup::all();
-        return view('penutups.index', compact('penutups'));
+        return view('admin.masukan_data_harian.memo_penutup.index', compact('penutups'));
     }
 
     public function create()
     {
-        return view('penutups.create');
+        return view('admin.masukan_data_harian.memo_penutup.index');
     }
 
     public function store(Request $request)
@@ -31,7 +35,7 @@ class PenutupController extends Controller
 
     public function edit(Penutup $penutup)
     {
-        return view('penutups.edit', compact('penutup'));
+        return view('admin.masukan_data_harian.memo_penutup.index', compact('penutup'));
     }
 
     public function update(Request $request, Penutup $penutup)

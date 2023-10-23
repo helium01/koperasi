@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 
 class SuplementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $suplements = Suplement::all();
-        return view('suplements.index', compact('suplements'));
+        return view('admin.masukan_data_harian.memo_suplement.index', compact('suplements'));
     }
 
     public function create()
     {
-        return view('suplements.create');
+        return view('admin.masukan_data_harian.memo_suplement.index');
     }
 
     public function store(Request $request)
@@ -31,7 +35,7 @@ class SuplementController extends Controller
 
     public function edit(Suplement $suplement)
     {
-        return view('suplements.edit', compact('suplement'));
+        return view('admin.masukan_data_harian.memo_suplement.index', compact('suplement'));
     }
 
     public function update(Request $request, Suplement $suplement)

@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 
 class SeluruhKartuBukuBesarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view("admin.cetak.seluruh_kartu_buku_besar.urut_no_perkiraan");
+    }
+    public function index2()
+    {
+        return view("admin.cetak.seluruh_kartu_buku_besar.urut_tanggal");
     }
 
     /**
