@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="{{asset('admin')}}/css/bootstrap.min.css">
     <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="{{asset('admin')}}/css/templatemo-style.css">
+    <style>
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select  {
+            background-color: white;
+            color: black;
+        }
+        .form-group select option {
+        background-color: white;
+        color: black;
+    }
+    </style>
     <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
@@ -71,7 +83,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/data_kas_banks">Masukan Data Kas/Bank</a>
+                                <a class="dropdown-item" href="/data_kas_banks">Koreksi Masukan Data Kas/Bank</a>
                                 <a class="dropdown-item" href="/memorials">Masukan Koreksi Data Memorial</a>
                                 <a class="dropdown-item" href="/suplements">Masukan Koreksi Data Memo Suplement</a>
                                 <a class="dropdown-item" href="/penutups">Masukan Koreksi Data Memo Penutup</a>

@@ -4,12 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+            <p class="text-white mt-5 mb-5">Koreksi Masukan Data Kas <b>Bank</b></p>
         </div>
     </div>
     <!-- row -->
     <div class="row tm-content-row">
-        <a href="#" class="btn btn-primary mb-3">Create Data</a>
+        <a href="/data_kas_banks/create" class="btn btn-primary mb-3">Create Data</a>
+        
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -24,27 +25,18 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($data_kas_banks as $data)
                 <tr>
-                    <td>2023-10-23</td>
-                    <td>Pemasukan</td>
-                    <td>123456</td>
-                    <td>101</td>
-                    <td>201</td>
-                    <td>Pemasukan dari penjualan</td>
-                    <td>UBL123</td>
-                    <td>1000000</td>
+                    <td>{{$data->tanggal}}</td>
+                    <td>{{$data->jenis}}</td>
+                    <td>{{$data->nomor_bukti}}</td>
+                    <td>{{$data->nomor_perkiraan}}</td>
+                    <td>{{$data->nomor_perkiraan_lawan}}</td>
+                    <td>{{$data->deskripsi}}</td>
+                    <td>{{$data->ubl}}</td>
+                    <td>{{$data->jumlah_uang}}</td>
                 </tr>
-                <tr>
-                    <td>2023-10-24</td>
-                    <td>Pengeluaran</td>
-                    <td>789012</td>
-                    <td>301</td>
-                    <td>401</td>
-                    <td>Pembayaran gaji karyawan</td>
-                    <td>UBL456</td>
-                    <td>500000</td>
-                </tr>
-                <!-- Tambahkan baris tambahan jika perlu -->
+                @endforeach
             </tbody>
         </table>
        

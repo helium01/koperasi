@@ -29,44 +29,39 @@
                     <th>RAB Oktober</th>
                     <th>RAB November</th>
                     <th>RAB Desember</th>
+                    <th>Created By</th>
+                    <th>Acion</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($rab_tahunans as $rab)
                 <tr>
-                    <td>2023</td>
-                    <td>123</td>
-                    <td>Perkiraan A</td>
-                    <td>1000</td>
-                    <td>1200</td>
-                    <td>800</td>
-                    <td>900</td>
-                    <td>1100</td>
-                    <td>1000</td>
-                    <td>1300</td>
-                    <td>1400</td>
-                    <td>1500</td>
-                    <td>1200</td>
-                    <td>1100</td>
-                    <td>1000</td>
+                    <td>{{$rab->tahun}}</td>
+                    <td>{{$rab->nomor_perkiraan}}</td>
+                    <td>{{$rab->nama_perkiraan}}</td>
+                    <td>{{$rab->rab_januari}}</td>
+                    <td>{{$rab->rab_februari}}</td>
+                    <td>{{$rab->rab_maret}}</td>
+                    <td>{{$rab->rab_april}}</td>
+                    <td>{{$rab->rab_mei}}</td>
+                    <td>{{$rab->rab_juni}}</td>
+                    <td>{{$rab->rab_juli}}</td>
+                    <td>{{$rab->rab_agustus}}</td>
+                    <td>{{$rab->rab_september}}</td>
+                    <td>{{$rab->rab_oktober}}</td>
+                    <td>{{$rab->rab_november}}</td>
+                    <td>{{$rab->rab_desember}}</td>
+                    <td>{{$rab->created_by}}</td>
+                    <td>
+                        <a href="{{ route('rab_tahunans.edit', $rab->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('rab_tahunans.destroy', $rab->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>456</td>
-                    <td>Perkiraan B</td>
-                    <td>1500</td>
-                    <td>1300</td>
-                    <td>1100</td>
-                    <td>1400</td>
-                    <td>1200</td>
-                    <td>1000</td>
-                    <td>1100</td>
-                    <td>1200</td>
-                    <td>1400</td>
-                    <td>1300</td>
-                    <td>1200</td>
-                    <td>1500</td>
-                </tr>
-                <!-- Tambahkan baris tambahan jika perlu -->
+                @endforeach
             </tbody>
         </table>
         </div>

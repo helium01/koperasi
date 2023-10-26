@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\data_kas_bank;
 use Illuminate\Http\Request;
+use App\Models\nomor_perkiraan;
 
 class DataKasBankController extends Controller
 {
@@ -16,16 +17,52 @@ class DataKasBankController extends Controller
         $data_kas_banks = data_kas_bank::all();
         return view('admin.masukan_data_harian.koreksi_data_kas_bank.index', compact('data_kas_banks'));
     }
-
-    public function create()
+    public function index2($no_bukti)
     {
-        return view('admin.masukan_data_harian.koreksi_data_kas_bank.create');
+        $data_kas_banks = data_kas_bank::where("nomor_bukti",$no_bukti)->get();
+        $jumlah=0;
+        foreach($data_kas_banks as $data){
+            $jumlah+=$data->jumlah_uang;
+        }
+        return response()->json([
+            "data"=>$data_kas_banks,
+            "jumlah"=>$jumlah
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+        $nomor_perkiraan=nomor_perkiraan::all();
+        // dd($request->tanggal);
+        $data=$request->tanggal;
+        $jenis=$request->jenis;
+        // $datetime = new DateTime($data);
+        // Menghapus tahun dan tanda "-"
+        $no_bukti=null;
+        if($data !=null){
+            $dateWithoutYear = substr($data, 5);
+
+            // Menghapus tanda "-" dari string
+            $dateWithoutDashes = str_replace('-', '', $dateWithoutYear);
+            $nilai=data_kas_bank::where("tanggal",$request->tanggal)->where('jenis',$jenis)->orderBy('created_at','desc')->first();
+            // dd($nilai);
+            if($nilai != null){
+                $nb=$nilai->nomor_bukti;
+                $nb_int=(int)$nb+1;
+                // dd(strval($nb_int));
+                $no_bukti=strval($nb_int);
+            }else{
+                // dd($dateWithoutDashes."001");
+                $no_bukti=$dateWithoutDashes."001";
+            }
+        }
+        return view('admin.masukan_data_harian.koreksi_data_kas_bank.create',compact('data','jenis','no_bukti','nomor_perkiraan'));
     }
 
     public function store(Request $request)
     {
         data_kas_bank::create($request->all());
-        return redirect()->route('data_kas_banks.index');
+        return response()->json([$request->all()]);
     }
 
     public function show(data_kas_bank $data_kas_bank)

@@ -41,8 +41,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('rab_tahunans', RabTahunanController::class);
 
 Route::resource('saldo_awals', SaldoAwalController::class);
+Route::get('saldo_awal/{nomor}', [SaldoAwalController::class,'index2']);
 
 Route::resource('data_kas_banks', DataKasBankController::class);
+Route::get('/api/data_kas_banks/{no_bukti}', [DataKasBankController::class,'index2']);
 
 Route::resource('memorials', MemorialController::class);
 

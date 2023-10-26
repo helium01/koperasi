@@ -17,6 +17,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Kode</th>
                         <th scope="col">Uraian</th>
+                        <th scope="col">Created_by</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -26,8 +27,14 @@
                         <th scope="row">{{ $nomorPerkiraan->id }}</th>
                         <td>{{ $nomorPerkiraan->kode }}</td>
                         <td>{{ $nomorPerkiraan->uraian }}</td>
+                        <td>{{ $nomorPerkiraan->created_by }}</td>
                         <td>
-                            <!-- tambahkan tombol edit dan delete di sini -->
+                            <a href="{{ route('nomor_perkiraans.edit', $nomorPerkiraan->id) }}" class="btn btn-primary">Edit</a>
+            <form action="{{ route('nomor_perkiraans.destroy', $nomorPerkiraan->id) }}" method="POST" style="display: inline-block;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
                         </td>
                     </tr>
                     @endforeach

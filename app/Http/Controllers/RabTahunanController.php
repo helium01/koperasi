@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\rab_tahunan;
+use App\Models\nomor_perkiraan;
 use Illuminate\Http\Request;
 
 class RabTahunanController extends Controller
@@ -19,7 +20,8 @@ class RabTahunanController extends Controller
 
     public function create()
     {
-        return view('admin.proses_awal.rab_tahunan.create');
+        $nomor_perkiraan=nomor_perkiraan::all();
+        return view('admin.proses_awal.rab_tahunan.create',compact('nomor_perkiraan'));
     }
 
     public function store(Request $request)
@@ -35,7 +37,8 @@ class RabTahunanController extends Controller
 
     public function edit(Rab_tahunan $rab_tahunan)
     {
-        return view('admin.proses_awal.rab_tahunan.index', compact('rab_tahunan'));
+        $nomor_perkiraan=nomor_perkiraan::all();
+        return view('admin.proses_awal.rab_tahunan.edit', compact('rab_tahunan','nomor_perkiraan'));
     }
 
     public function update(Request $request, Rab_tahunan $rab_tahunan)

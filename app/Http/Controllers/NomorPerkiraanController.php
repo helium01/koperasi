@@ -20,6 +20,15 @@ class NomorPerkiraanController extends Controller
 
     public function store(Request $request)
     {
+        $existingNomorPerkiraan = nomor_perkiraan::where('kode', $request->kode)->first();
+        $existinguraianPerkiraan = nomor_perkiraan::where('uraian', $request->uraian)->first();
+
+    if ($existingNomorPerkiraan) {
+        return back()->withErrors(['kode' => 'Kode sudah digunakan.']);
+    }
+    if ($existinguraianPerkiraan) {
+        return back()->withErrors(['uraian' => 'uraian sudah digunakan.']);
+    }
         nomor_perkiraan::create($request->all());
         return redirect()->route('nomor_perkiraans.index');
     }

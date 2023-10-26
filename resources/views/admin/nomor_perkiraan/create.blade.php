@@ -28,11 +28,18 @@
                 @csrf
                 <div class="form-group">
                     <label for="kode">Kode:</label>
-                    <input type="text" class="form-control" id="kode" name="kode" required>
+                    <input type="text" class="form-control" id="kode" name="kode" maxlength="5" required>
+                    @error('kode')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 </div>
                 <div class="form-group">
                     <label for="uraian">Uraian:</label>
                     <input type="text" class="form-control" id="uraian" name="uraian" required>
+                    <input type="hidden" class="form-control" id="uraian" name="created_by" value="{{Auth::user()->name}}">
+                    @error('uraian')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

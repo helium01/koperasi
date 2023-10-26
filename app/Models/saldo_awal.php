@@ -11,7 +11,7 @@ class saldo_awal extends Model
     protected $fillable = [
         'nomor_perkiraan',
         'nama_perkiraan',
-        'jensi',
+        'jenis',
         'saldo_awal',
         'created_by',
     ];
