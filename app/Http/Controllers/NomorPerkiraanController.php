@@ -45,6 +45,7 @@ class NomorPerkiraanController extends Controller
 
     public function update(Request $request, nomor_perkiraan $nomor_perkiraan)
     {
+        
         $nomor_perkiraan->update($request->all());
         return redirect()->route('nomor_perkiraans.index');
     }

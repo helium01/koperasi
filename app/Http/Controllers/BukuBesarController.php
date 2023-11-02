@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BukuBesarController extends Controller
 {
@@ -11,7 +12,11 @@ class BukuBesarController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.buku_besar.urut_no_perkiraan");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        $pdf = pdf::loadView('admin.cetak.buku_besar.urut_no_perkiraan',compact('base64'));
+        return $pdf->download('buku_besar.pdf');
+        return view("");
         //
     }
     public function index2()

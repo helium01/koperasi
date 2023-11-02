@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class NeracaLajurController extends Controller
 {
@@ -17,7 +18,9 @@ class NeracaLajurController extends Controller
     {
         $image = file_get_contents(public_path('logo.jpg'));
         $base64 = 'data:image/png;base64,' . base64_encode($image);
-        return view("admin.cetak.neraca_lajur.neraca",compact('base64'));
+        $pdf = pdf::loadView('admin.cetak.neraca_lajur.neraca',compact('base64'));
+        return $pdf->download('neraca_lajur.pdf');
+        // return view("admin.cetak.neraca_lajur.neraca",compact('base64'));
     }
 
     /**

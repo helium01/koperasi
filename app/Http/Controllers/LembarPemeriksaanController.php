@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LembarPemeriksaanController extends Controller
 {
@@ -15,7 +16,11 @@ class LembarPemeriksaanController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.lembar_pemeriksaan.lp_kas_bank");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        $pdf = pdf::loadView('admin.cetak.lembar_pemeriksaan.lp_kas_bank',compact('base64'));
+        return $pdf->download('lembar_pemeriksaan.pdf');
+        // return view("");
     }
     public function index2()
     {

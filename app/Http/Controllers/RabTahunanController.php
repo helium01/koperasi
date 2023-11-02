@@ -26,6 +26,10 @@ class RabTahunanController extends Controller
 
     public function store(Request $request)
     {
+        $data=rab_tahunan::where("tahun",$request->tahun)->count();
+        if($data !=0){
+            return back()->withErrors(['kode' => 'tahun sudah ada rab nya bisa edit rab sesuai tahun.']);
+        }
         Rab_tahunan::create($request->all());
         return redirect()->route('rab_tahunans.index');
     }

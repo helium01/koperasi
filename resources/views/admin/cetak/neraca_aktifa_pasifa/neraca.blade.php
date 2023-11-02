@@ -44,7 +44,7 @@
         <div id="header">
             <img id="logo" src="{{$base64}}" alt="Logo">
             <h1>KOPERASI KONSUMEN KARYAWAN<br> PABRIK GULA DJATIROTO</h1>
-            <h2>NERACA PER 31 DESEMBER 2022 DAN 31 DESEMBER 2023</h2>
+            <h4>NERACA PER 31 DESEMBER 2022 DAN 31 DESEMBER 2023</h4>
         </div>
         
         <table>

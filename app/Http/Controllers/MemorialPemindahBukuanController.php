@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MemorialPemindahBukuanController extends Controller
 {
@@ -15,7 +16,11 @@ class MemorialPemindahBukuanController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.memorial_pemindah_bukuan.pemindah_bukuan");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        $pdf = pdf::loadView('admin.cetak.memorial_pemindah_bukuan.pemindah_bukuan',compact('base64'));
+        return $pdf->download('memorial_pemindah_bukuan.pdf');
+        return view("");
     }
 
     /**

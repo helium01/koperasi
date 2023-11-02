@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SeluruhKartuBukuBesarController extends Controller
 {
@@ -15,7 +16,11 @@ class SeluruhKartuBukuBesarController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.seluruh_kartu_buku_besar.urut_no_perkiraan");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        $pdf = pdf::loadView('admin.cetak.seluruh_kartu_buku_besar.urut_no_perkiraan',compact('base64'));
+        return $pdf->download('seluruh_kartu_buku_besar.pdf');
+        return view("");
     }
     public function index2()
     {

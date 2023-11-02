@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MemorialSaldoAwalController extends Controller
 {
@@ -11,7 +12,11 @@ class MemorialSaldoAwalController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.memorial_saldo_awal.per_perkiraan");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        $pdf = pdf::loadView('admin.cetak.memorial_saldo_awal.per_perkiraan',compact('base64'));
+        return $pdf->download('memorial_saldo_awal.pdf');
+        return view("");
         //
     }
     public function index2()

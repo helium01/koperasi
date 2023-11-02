@@ -38,6 +38,13 @@
           </ul>
           <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di nomor perkiraan
           </p>
+          <h1>video tutorial</h1>
+
+            <video width="320" height="240" controls>
+                <source src="{{asset('langkah1.mkv')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
         </div>
       
         <div class="tutorial mt-3 text-white" id="langkah2" style="display:none;">
@@ -63,6 +70,12 @@
           <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
             dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
           </p>
+          <h1>video tutorial</h1>
+
+          <video width="320" height="240" controls>
+              <source src="{{asset('langkah2.mkv')}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
         </div>
       
         <div class="tutorial mt-3 text-white" id="langkah3" style="display:none;">
@@ -88,6 +101,12 @@
             <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
               dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
             </p>
+            <h1>video tutorial</h1>
+
+          <video width="320" height="240" controls>
+              <source src="{{asset('langkah3.mkv')}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
           </div>
           <div class="tutorial mt-3 text-white" id="langkah4" style="display:none;">
             <h2>Langkah 4:koreksi masukan data kas Bank</h2>
@@ -112,6 +131,12 @@
             <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
               dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
             </p>
+            <h1>video tutorial</h1>
+
+          <video width="320" height="240" controls>
+              <source src="{{asset('langkah4.mkv')}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
           </div>
           <div class="tutorial mt-3 text-white" id="langkah5" style="display:none;">
             <h2>Langkah 5: masukan koreksi data memorial</h2>
@@ -136,6 +161,12 @@
             <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
               dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
             </p>
+            <h1>video tutorial</h1>
+
+            <video width="320" height="240" controls>
+                <source src="{{asset('langkah5.mkv')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
           </div>
           <div class="tutorial mt-3 text-white" id="langkah6" style="display:none;">
             <h2>Langkah 6: masukan koreksi data memo suplement</h2>
@@ -160,6 +191,12 @@
             <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
               dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
             </p>
+            <h1>video tutorial</h1>
+
+            <video width="320" height="240" controls>
+                <source src="{{asset('langkah6.mkv')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
           </div>
           <div class="tutorial mt-3 text-white" id="langkah7" style="display:none;">
             <h2>Langkah 7: masukan koreksi data penutup</h2>
@@ -184,6 +221,12 @@
             <p>apabila ingin mengedit dan menghapus data terdapat button edit dan hapus di pojok kanan setiap kolom data yang di tampilkan di rab tahun ini 
               dengan cara geser kurser ke kanan ada fied acion dengan button edit dan hapus
             </p>
+            <h1>video tutorial</h1>
+
+            <video width="320" height="240" controls>
+                <source src="{{asset('langkah6.mkv')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
           </div>
       </div>
       

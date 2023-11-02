@@ -31,6 +31,9 @@
                         <div class="form-group">
                             <label for="tahun">Tahun</label>
                             <input type="text" class="form-control" id="tahun" min="1900" max="2099" name="tahun" required>
+                            @error('kode')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="nomor_perkiraan">Nomor Perkiraan</label>
