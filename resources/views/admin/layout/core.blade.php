@@ -35,7 +35,7 @@
     <div class="" id="home">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <h1 class="tm-site-title mb-0">KOPKAR PABRIK GULA DJATIROTO</h1>
                 </a>
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -46,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="/">
                                 <i class="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span class="sr-only">(current)</span>
@@ -107,7 +107,7 @@
                                 <a class="dropdown-item" href="/cetak/memorial_saldo_awal">Saldo Awal</a>
                                 <a class="dropdown-item" href="/cetak/neraca_lajur">Neraca Lajur</a>
                                 <a class="dropdown-item" href="/cetak/neraca_aktifa_pasifa">Neraca Aktifa Pasifa</a>
-                                <a class="dropdown-item" href="/cetak_laba_rugi">Laba Rugi</a>
+                                <a class="dropdown-item" href="/cetak/laba_rugi">Laba Rugi</a>
                             </div>
                         </li>
 

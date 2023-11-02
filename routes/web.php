@@ -45,12 +45,27 @@ Route::get('saldo_awal/{nomor}', [SaldoAwalController::class,'index2']);
 
 Route::resource('data_kas_banks', DataKasBankController::class);
 Route::get('/api/data_kas_banks/{no_bukti}', [DataKasBankController::class,'index2']);
+Route::get('/data_kas_banks/edit/{no_bukti}', [DataKasBankController::class,'edit2']);
+Route::get('/data_kas_banks/delete/{id}', [DataKasBankController::class,'destroy']);
+Route::get('/data_kas_banks/hapus/{id}', [DataKasBankController::class,'destroy2']);
 
 Route::resource('memorials', MemorialController::class);
+Route::get('api/memorials/{no_bukti}', [MemorialController::class,'index2']);
+Route::get('/memorials/edit/{no_bukti}', [MemorialController::class,'edit2']);
+Route::get('/memorials/delete/{id}', [MemorialController::class,'destroy']);
+Route::get('/memorials/hapus/{id}', [MemorialController::class,'destroy2']);
 
 Route::resource('suplements', SuplementController::class);
+Route::get('api/suplements/{no_bukti}', [SuplementController::class,'index2']);
+Route::get('/suplements/edit/{no_bukti}', [SuplementController::class,'edit2']);
+Route::get('/suplements/delete/{id}', [SuplementController::class,'destroy']);
+Route::get('/suplements/hapus/{id}', [SuplementController::class,'destroy2']);
 
 Route::resource('penutups', PenutupController::class);
+Route::get('api/penutups/{no_bukti}', [PenutupController::class,'index2']);
+Route::get('/penutups/edit/{no_bukti}', [penutupController::class,'edit2']);
+Route::get('/penutups/delete/{id}', [penutupController::class,'destroy']);
+Route::get('/penutups/hapus/{id}', [penutupController::class,'destroy2']);
 
 Route::resource('nomor_perkiraans', NomorPerkiraanController::class);
 

@@ -12,9 +12,15 @@ class DataKasBankController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $data_kas_banks = data_kas_bank::all();
+        $data=$request->tanggal;
+        if($data !=0){
+            $data_kas_banks=data_kas_bank::where("tanggal",$data)->get();
+        }else{
+            $data_kas_banks = data_kas_bank::all();
+
+        }
         return view('admin.masukan_data_harian.koreksi_data_kas_bank.index', compact('data_kas_banks'));
     }
     public function index2($no_bukti)
@@ -70,9 +76,17 @@ class DataKasBankController extends Controller
         return view('admin.masukan_data_harian.koreksi_data_kas_bank.show', compact('data_kas_bank'));
     }
 
+    public function edit2($no_bukti)
+    {
+        $nomor_perkiraan=nomor_perkiraan::all();
+          
+        $data_kas_bank=data_kas_bank::where('nomor_bukti',$no_bukti)->first();
+
+        return view('admin.masukan_data_harian.koreksi_data_kas_bank.edit', compact('data_kas_bank','nomor_perkiraan'));
+    }
     public function edit(data_kas_bank $data_kas_bank)
     {
-        return view('admin.masukan_data_harian.koreksi_data_kas_bank.edit', compact('data_kas_bank'));
+        return response()->json(['data' => $data_kas_bank]);
     }
 
     public function update(Request $request, data_kas_bank $data_kas_bank)
@@ -81,9 +95,15 @@ class DataKasBankController extends Controller
         return redirect()->route('data_kas_banks.index');
     }
 
-    public function destroy(data_kas_bank $data_kas_bank)
+    public function destroy($id)
     {
+        $data_kas_bank=data_kas_bank::find($id);
         $data_kas_bank->delete();
+        return redirect()->route('data_kas_banks.index');
+    }
+    public function destroy2($id)
+    {
+        $data_kas_bank=data_kas_bank::where("nomor_bukti",$id)->delete();
         return redirect()->route('data_kas_banks.index');
     }
 }

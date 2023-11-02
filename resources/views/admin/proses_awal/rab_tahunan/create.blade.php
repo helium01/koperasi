@@ -30,7 +30,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="tahun">Tahun</label>
-                            <input type="text" class="form-control" id="tahun" name="tahun" required>
+                            <input type="text" class="form-control" id="tahun" min="1900" max="2099" name="tahun" required>
                         </div>
                         <div class="form-group">
                             <label for="nomor_perkiraan">Nomor Perkiraan</label>
@@ -121,5 +121,11 @@
         document.getElementById('nama_perkiraan').value = uraian;
     }
 </script>
+<script>
+    function showYears() {
+      var yearInput = document.getElementById('yearInput').value;
+      alert("Tahun yang dipilih: " + yearInput);
+    }
+  </script>
 @endsection
 

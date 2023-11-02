@@ -25,9 +25,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-       
-       
-       
     </div>
     @else
     <div class="row">

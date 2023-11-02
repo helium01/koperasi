@@ -15,7 +15,9 @@ class NeracaAktifaPasifaController extends Controller
      */
     public function index()
     {
-        return view("admin.cetak.neraca_aktifa_pasifa.neraca");
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        return view("admin.cetak.neraca_aktifa_pasifa.neraca",compact('base64'));
     }
 
     /**
