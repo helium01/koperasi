@@ -18,9 +18,9 @@ class NeracaController extends Controller
     {
         $image = file_get_contents(public_path('logo.jpg'));
         $base64 = 'data:image/png;base64,' . base64_encode($image);
+        // return view('admin.cetak.neraca.neraca',compact('base64'));
         $pdf = pdf::loadView('admin.cetak.neraca.neraca',compact('base64'));
-        return $pdf->download('neraca.pdf');
-        return view("");
+        return $pdf->setPaper('a3', 'landscape')->download('neraca.pdf');
     }
 
     /**

@@ -33,46 +33,71 @@
     }
     #logo {
         float: left;
-        height: 100px; /* Sesuaikan dengan tinggi tulisan */
+        height: 50px; /* Sesuaikan dengan tinggi tulisan */
         /* margin-right: 5px; */
     }
     h1, h2 {
         margin: 0;
     }
+    #header {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    width: 80px; /* Sesuaikan lebar sesuai kebutuhan */
+    height: auto; /* Sesuaikan tinggi sesuai kebutuhan atau biarkan otomatis */
+}
+
+#header-text {
+    margin-left: 20px; /* Sesuaikan jarak dari logo sesuai kebutuhan */
+}
 </style>
 <div class="container">
-    <div id="header">
-        <img id="logo" src="{{$base64}}" alt="Logo">
-        <h1>KOPERASI KONSUMEN KARYAWAN<br> PABRIK GULA DJATIROTO</h1>
-        <h4>NERACA PER 31 DESEMBER 2022 DAN 31 DESEMBER 2023</h4>
+    =====================================================================================================================================================================================
+    <div id="header" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <img id="logo" src="{{$base64}}" alt="Logo" style="width: 120px; height: auto;">
+            <div>
+                <h4 style="text-align: left;">PT PERKEBUNAN "KOPKAR PABRIK GULA DJATIROTO"<br>UNIT KERJA PTPN XI PG. JATIROTO</h4>
+               
+            </div>
+            <h1 style="margin-left: 20px;">NERACA SISA</h1>
+        </div>
+        <div style="text-align: right;">
+            <div>
+                <h4>WAKTU</h4>
+                <span>HALAMAN: 1</span><br>
+                <span>BULAN : DESEMBER 2022</span>
+            </div>
+        </div>
     </div>
+    
     
     <table>
         <tr>
             <th rowspan="2">No</th>
-            <th rowspan="2">No. Perk</th>
-            <th rowspan="2">Nama Perkiraan</th>
-            <th colspan="2">Neraca Sisa Per 1 Januari</th>
-            <th colspan="2">Mutasi Bulan Ini</th>
-            <th colspan="2">Mutasi sd Bulan Ini</th>
-            <th colspan="2">SHU Tahun 2023</th>
-            <th colspan="2">Neraca per 31 Desember 2023</th>
+            <th rowspan="2">NOMOR DAN NAMA PERKIRAAN</th>
+            <th colspan="2">JUMLAH SD AKHIR THN.YBL AWAL THN.INI</th>
+            <th colspan="2">MUTASI BULAN INI</th>
+            <th colspan="2">MUTASI SAMPAI DENGAN BULAN INI</th>
+            <th colspan="2">JUMLAH SD.BULAN INI/PD.TAHUN INI</th>
+            <th colspan="2">RAB SD.BL.INI</th>
         </tr>
         <tr>
-            <th>D</th>
-            <th>K</th>
-            <th>D</th>
-            <th>K</th>
-            <th>D</th>
-            <th>K</th>
-            <th>D</th>
-            <th>K</th>
-            <th>D</th>
-            <th>K</th>
+            <th>DEBIT</th>
+            <th>KREDIT</th>
+            <th>DEBIT</th>
+            <th>KREDIT</th>
+            <th>DEBIT</th>
+            <th>KREDIT</th>
+            <th>DEBIT</th>
+            <th>KREDIT</th>
+            <th>DEBIT</th>
+            <th>KREDIT</th>
             
         </tr>
         <tr>
-            <td>...</td>
             <td>...</td>
             <td>...</td>
             <td>...</td>
