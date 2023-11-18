@@ -9,8 +9,26 @@
     </div>
     <!-- row -->
     <div class="row tm-content-row">
+        <form action="/nomor_perkiraans" method="GET">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Cari..." name="search">
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="submit">Cari</button>
+              </div>
+            </div>
+          </form>
+          <form action="/import/no_perkiraan" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group mb-3">
+              <input type="file" class="form-control" placeholder="Cari..." name="import">
+              <div class="input-group-append">
+                <button class="btn btn-info" type="submit">Import Data</button>
+              </div>
+            </div>
+          </form>
         <a href="/nomor_perkiraans/create" class="btn btn-primary mb-3">Create Data</a>
         <div class="table-responsive">
+            {{$nomor_perkiraans->links()}}
             <table class="table">
                 <thead>
                     <tr>

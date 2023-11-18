@@ -28,7 +28,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="kode">Kode:</label>
-                    <input type="text" class="form-control" id="kode" name="kode" maxlength="5" required>
+                    <input type="text" class="form-control" id="kode" name="kode" maxlength="10" required>
                     @error('kode')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

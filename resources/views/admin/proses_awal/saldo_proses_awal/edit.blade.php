@@ -15,7 +15,7 @@
             @method("PUT")
             <div class="form-group">
                 <label for="nomor_perkiraan">Nomor Perkiraan</label>
-                <input type="text" class="form-control" id="nomor_perkiraan" maxlength="5" name="nomor_perkiraan" required readonly value="{{$saldo_awal->nomor_perkiraan}}">
+                <input type="text" class="form-control" id="nomor_perkiraan" maxlength="10" name="nomor_perkiraan" required readonly value="{{$saldo_awal->nomor_perkiraan}}">
             </div>
             <div class="form-group">
                 <label for="nama_perkiraan">Nama Perkiraan</label>

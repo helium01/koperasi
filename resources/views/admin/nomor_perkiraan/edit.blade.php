@@ -29,7 +29,7 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="kode">Kode:</label>
-                    <input type="text" class="form-control" id="kode" name="kode" maxlength="5" required value="{{$nomor_perkiraan->kode}}" readonly>
+                    <input type="text" class="form-control" id="kode" name="kode" maxlength="10" required value="{{$nomor_perkiraan->kode}}" readonly>
                     @error('kode')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

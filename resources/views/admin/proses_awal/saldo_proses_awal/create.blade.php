@@ -14,7 +14,8 @@
             @csrf
             <div class="form-group">
                 <label for="nomor_perkiraan">Nomor Perkiraan</label>
-                <input type="text" class="form-control" id="nomor_perkiraan" maxlength="5" name="nomor_perkiraan" required onchange="getNamaPerkiraan()">
+                <input type="text" class="form-control" id="nomor_perkiraan" maxlength="10" name="nomor_perkiraan" required onchange="getNamaPerkiraan()">
+                <div id="searchResults" class="mt-2"></div>
             </div>
             <div class="form-group">
                 <label for="nama_perkiraan">Nama Perkiraan</label>
@@ -59,8 +60,6 @@
                 }
             }
         </script>
-       
-       
        
     </div>
 </div>

@@ -68,6 +68,8 @@ Route::get('/penutups/delete/{id}', [penutupController::class,'destroy']);
 Route::get('/penutups/hapus/{id}', [penutupController::class,'destroy2']);
 
 Route::resource('nomor_perkiraans', NomorPerkiraanController::class);
+route::get('/nomor_perkiraan/search',[NomorPerkiraanController::class,'cari']);
+Route::post('/import/no_perkiraan', [NomorPerkiraanController::class,'import']);
 
 route::get("/cetak/laba_rugi",[LabaRugiController::class,'index']);
 route::get("/cetak/lembar_pemeriksaan",[LembarPemeriksaanController::class,'index']);
