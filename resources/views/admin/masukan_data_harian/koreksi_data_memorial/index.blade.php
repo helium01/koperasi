@@ -79,7 +79,7 @@
                     <td>{{$memori->nomor_perkiraan}}</td>
                     <td>{{$memori->deskripsi}}</td>
                     <td>{{$memori->ubl}}</td>
-                    <td>{{$memori->jumlah_uang}}</td>
+                    <td>{{number_format($memori->jumlah_uang, 0, ',', '.')}}</td>
                     <td>{{$memori->jenis}}</td>
                     <td>{{$memori->created_by}}</td>
                     <td>

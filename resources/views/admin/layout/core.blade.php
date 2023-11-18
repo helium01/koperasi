@@ -24,6 +24,10 @@
         background-color: white;
         color: black;
     }
+    #searchResults {
+    max-height: 200px; /* Set the maximum height according to your design */
+    overflow-y: auto;
+}
     </style>
     <!--
 	Product Admin CSS Template

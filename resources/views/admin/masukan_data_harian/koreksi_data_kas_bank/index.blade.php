@@ -26,13 +26,18 @@
                 </form>
             </div>
         </div>
-        
+        <div class="container mt-5">
+            <h1 class="mb-4">Debit sampai bulan ini : 
+                {{number_format($jumlahKeluar, 0, ',', '.')}}</h1>
+            <h1>Kredit sampai bulan ini : 
+                {{number_format($jumlahMasuk, 0, ',', '.')}}</h1>
+        </div>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>Tanggal</th>
                     <th>Jenis</th>
-                    <th>Nomor Bukti</th>
+                    <th>jumlah</th>
                     <th>Nomor Perkiraan</th>
                     <th>Nomor Perkiraan Lawan</th>
                     <th>Deskripsi</th>
@@ -55,7 +60,8 @@
                     <td>{{$data->nomor_perkiraan_lawan}}</td>
                     <td>{{$data->deskripsi}}</td>
                     <td>{{$data->ubl}}</td>
-                    <td>{{$data->jumlah_uang}}</td>
+                    <td>
+                        {{number_format($data->jumlah_uang, 0, ',', '.')}}</td>
                     <td>{{$data->created_by}}</td>
                     <td>
                         <a href="/data_kas_banks/edit/{{$data->nomor_bukti}}" class="btn btn-primary">Edit</a>

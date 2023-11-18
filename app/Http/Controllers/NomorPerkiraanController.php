@@ -31,6 +31,14 @@ class NomorPerkiraanController extends Controller
     {
         return view('admin.nomor_perkiraan.create');
     }
+    public function getNamaPerkiraan($nomorPerkiraan)
+    {
+        // Lakukan logika untuk mendapatkan data dropdown berdasarkan $nomorPerkiraan
+        $namaPerkiraans = nomor_perkiraan::where('kode', 'like', "$nomorPerkiraan%")->get();
+
+        // Kembalikan tampilan (misalnya, menggunakan view atau JSON)
+        return response()->json($namaPerkiraans);
+    }
     public function import(Request $request)
     {
         $request->validate([

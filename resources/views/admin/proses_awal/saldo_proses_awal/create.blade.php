@@ -60,6 +60,52 @@
                 }
             }
         </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#nomor_perkiraan').on('input', function () {
+                    var nomorPerkiraan = $(this).val();
+        
+                    // Kirim permintaan Ajax ke server
+                    $.ajax({
+                        url: '/get-nama-perkiraan/' + nomorPerkiraan,
+                        type: 'GET',
+                        success: function (data) {
+                             // Kosongkan elemen searchResults sebelum menambahkan data baru
+                             $('#searchResults').empty();
+
+                            // Iterasi melalui data dan tambahkan elemen div untuk setiap item
+                            $.each(data, function (index, item) {
+                                $('#searchResults').append('<div class="dropdown-item">' + item.kode + ' | ' + item.uraian + '</div>');
+                            });
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+                $('#searchResults').on('click', '.dropdown-item', function () {
+            // Get the text content of the clicked item
+            var selectedItemText = $(this).text();
+            var parts = selectedItemText.split('|').map(function (part) {
+        return part.trim();
+    });
+
+            // Extract nomor_perkiraan from the text (assuming it is separated by '|')
+            var nomorPerkiraan = selectedItemText.split('|')[0].trim();
+
+            // Set the value of nomor_perkiraan input
+            $('#nomor_perkiraan').val(nomorPerkiraan);
+// Extract uraian from the data attribute
+var uraian = parts[1];
+console.log(uraian);
+// Set the value of nama_perkiraan input
+$('#nama_perkiraan').val(uraian);
+            // Clear the dropdown after selecting an item (optional)
+            $('#searchResults').empty();
+        });
+            });
+        </script>
        
     </div>
 </div>

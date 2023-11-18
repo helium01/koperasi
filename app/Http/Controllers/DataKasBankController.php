@@ -16,12 +16,21 @@ class DataKasBankController extends Controller
     {
         $data=$request->tanggal;
         if($data !=0){
-            $data_kas_banks=data_kas_bank::where("tanggal",$data)->get();
+            $data_kas_banks=data_kas_bank::where("tanggal",$data)->get();// Menghitung jumlah uang untuk jenis 'Masuk'
+            $jumlahMasuk =data_kas_bank::where('jenis', 'Masuk')->sum('jumlah_uang');
+    
+            // Menghitung jumlah uang untuk jenis 'Keluar'
+            $jumlahKeluar =data_kas_bank::where('jenis', 'Keluar')->sum('jumlah_uang');
         }else{
             $data_kas_banks = data_kas_bank::all();
+            // Menghitung jumlah uang untuk jenis 'Masuk'
+        $jumlahMasuk =data_kas_bank::where('jenis', 'Masuk')->sum('jumlah_uang');
+
+        // Menghitung jumlah uang untuk jenis 'Keluar'
+        $jumlahKeluar =data_kas_bank::where('jenis', 'Keluar')->sum('jumlah_uang');
 
         }
-        return view('admin.masukan_data_harian.koreksi_data_kas_bank.index', compact('data_kas_banks'));
+        return view('admin.masukan_data_harian.koreksi_data_kas_bank.index', compact('data_kas_banks','jumlahMasuk','jumlahKeluar'));
     }
     public function index2($no_bukti)
     {
@@ -38,7 +47,7 @@ class DataKasBankController extends Controller
 
     public function create(Request $request)
     {
-        $nomor_perkiraan=nomor_perkiraan::all();
+        $nomor_perkiraan=nomor_perkiraan::where('uraian','KAS')->orWhere('uraian', 'BANK')->get();
         // dd($request->tanggal);
         $data=$request->tanggal;
         $jenis=$request->jenis;

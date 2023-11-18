@@ -28,24 +28,15 @@
             </tr>
             <tr>
                 <td class="text-white">Nomor Perkiraan:</td>
-                <td>
-                    <select  id="nomor_perkiraan" name="nomor_perkiraan" required >
-                        <option value="" disabled selected>Pilih Nomor Perkiraan</option>
-                        @foreach($nomor_perkiraan as $nomor)
-                            <option value="{{ $nomor->kode }}">{{ $nomor->kode }} |{{$nomor->uraian}}</option>
-                        @endforeach
-                    </select>
+                <td><input type="text" name="nomor_perkiraan" value="{{$data_kas_bank->nomor_perkiraan}}">
                 </td>
             </tr>
             <tr>
                 <td class="text-white">Nomor Perkiraan Lawan:</td>
                 <td>
-                    <select  id="nomor_perkiraan" name="nomor_perkiraan_lawan" required >
-                        <option value="" disabled selected>Pilih Nomor Perkiraan lawan</option>
-                        @foreach($nomor_perkiraan as $nomor)
-                            <option value="{{ $nomor->kode }}">{{ $nomor->kode }} |{{$nomor->uraian}}</option>
-                        @endforeach
-                    </select>
+                    
+                    <input type="text"  id="nomor_perkiraan" maxlength="10" name="nomor_perkiraan_lawan" required onchange="getNamaPerkiraan()">
+               <div id="searchResults" class="mt-2"></div>
                 </td>
             </tr>
             <tr>
@@ -155,7 +146,7 @@
                     row.append($('<td>').text(item.nomor_perkiraan_lawan));
                     row.append($('<td>').text(item.deskripsi));
                     row.append($('<td>').text(item.ubl));
-                    row.append($('<td>').text(item.jumlah_uang));
+                    row.append($('<td>').text(item.jumlah_uang.toLocaleString()));
                          // Tombol Edit
                     var editButton = $('<button>', {
                         text: 'Edit',
@@ -181,7 +172,7 @@
                 });
                 var totalRow = $('<tr>');
                 totalRow.append('<td colspan="3"><b>Total Jumlah Uang:</b></td>');
-                totalRow.append($('<td>').text(data.jumlah));
+                totalRow.append($('<td>').text(data.jumlah.toLocaleString()));
                 $('#dataContainer tbody').append(totalRow);
                 // Panggil fungsi lagi setelah beberapa waktu
                 setTimeout(getData, 1000); // Panggil setiap 5 detik (5000 milidetik)
@@ -205,7 +196,7 @@
             $('input[name="jenis"]').val(response.data.jenis);
             $('input[name="nomor_bukti"]').val(response.data.nomor_bukti);
             $('select[name="nomor_perkiraan"]').val(response.data.nomor_perkiraan);
-            $('select[name="nomor_perkiraan_lawan"]').val(response.data.nomor_perkiraan_lawan);
+            $('input[name="nomor_perkiraan_lawan"]').val(response.data.nomor_perkiraan_lawan);
             $('textarea[name="deskripsi"]').val(response.data.deskripsi);
             $('select[name="ubl"]').val(response.data.ubl);
             $('input[name="jumlah_uang"]').val(response.data.jumlah_uang);
@@ -238,5 +229,51 @@ function deleteFunction(item) {
 });
 
 </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#nomor_perkiraan').on('input', function () {
+                    var nomorPerkiraan = $(this).val();
+        
+                    // Kirim permintaan Ajax ke server
+                    $.ajax({
+                        url: '/get-nama-perkiraan/' + nomorPerkiraan,
+                        type: 'GET',
+                        success: function (data) {
+                             // Kosongkan elemen searchResults sebelum menambahkan data baru
+                             $('#searchResults').empty();
+
+                            // Iterasi melalui data dan tambahkan elemen div untuk setiap item
+                            $.each(data, function (index, item) {
+                                $('#searchResults').append('<div class="dropdown-item">' + item.kode + ' | ' + item.uraian + '</div>');
+                            });
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+                $('#searchResults').on('click', '.dropdown-item', function () {
+            // Get the text content of the clicked item
+            var selectedItemText = $(this).text();
+            var parts = selectedItemText.split('|').map(function (part) {
+        return part.trim();
+    });
+
+            // Extract nomor_perkiraan from the text (assuming it is separated by '|')
+            var nomorPerkiraan = selectedItemText.split('|')[0].trim();
+
+            // Set the value of nomor_perkiraan input
+            $('#nomor_perkiraan').val(nomorPerkiraan);
+// Extract uraian from the data attribute
+var uraian = parts[1];
+console.log(uraian);
+// Set the value of nama_perkiraan input
+$('#nama_perkiraan').val(uraian);
+            // Clear the dropdown after selecting an item (optional)
+            $('#searchResults').empty();
+        });
+            });
+        </script>
 @endsection
 
