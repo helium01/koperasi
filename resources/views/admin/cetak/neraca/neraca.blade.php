@@ -80,13 +80,12 @@
             <table>
                 <thead>
                     <tr id="header-text">
-                        <th rowspan="2">No Bukti</th>
                         <th rowspan="2">NOMOR DAN NAMA PERKIRAAN</th>
                         <th colspan="2">JUMLAH SD AKHIR THN.YBL AWAL THN.INI</th>
                         <th colspan="2">MUTASI BULAN INI</th>
                         <th colspan="2">MUTASI SAMPAI DENGAN BULAN INI</th>
                         <th colspan="2">JUMLAH SD.BULAN INI/PD.TAHUN INI</th>
-                        <th colspan="2">RAB SD.BL.INI</th>
+                        <th >RAB SD.BL.INI</th>
                     </tr>
                     <tr id="header-text">
                         <th>DEBIT</th>
@@ -98,169 +97,94 @@
                         <th>DEBIT</th>
                         <th>KREDIT</th>
                         <th>DEBIT</th>
-                        <th>KREDIT</th>
                         
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($totalsPerGolongan as $golongan => $totalPerGolongan)
                     @php
-                    $index=0
+                    $totalDebit = 0;
+                    $totalKredit = 0;
+                    $totalkasbankDebit=0;
+                    $totalkasbankKredit=0;
+                    $totalsampaibulaninikasbankDebit=0;
+                    $totalsampaibulaninikasbankKredit=0;
+                    $jumlahdebitsampaibulanini=0;
+                    $jumlahkreditsampaibulanini=0;
+                    $saldoawaldebit=0;
+                    $saldoawalkredit=0;
+                    $jumlahtotaldebit=0;
+                    $jumlahtotalkredit=0;
                 @endphp
-                @foreach ($data as $key=>$dt)
-                @foreach ($dt["items"] as $d)
-                <tr>
-                    <td>{{$d->nomor_bukti}}</td>
-                    <td>{{$d->nomor_perkiraan}} | {{$d->uraian}}</td>
-                    @if($d->jenis=="debit")
-                    <td>{{$d->jumlah_uang}}</td>
-                    <td>0</td>
-                    @else
-                    <td>0</td>
-                    <td>{{$d->jumlah_uang}}</td>
-                    @endif
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
+                    @foreach ($totalPerGolongan['details'] as $detail)
+                        <tr>
+                            <td style="text-align: left;">{{ $detail['kode'] }} |{{ $detail['uraian'] }}</td>
+                            @if ($detail['jenis']=='debit')
+                                <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
+                                <td>{{number_format(0, 2, ',', '.')}}</td>
+                        @php
+                        $saldoawaldebit=$detail['saldo_awal'];
+                            $totalDebit += $detail['saldo_awal'];
+                        @endphp
+                            @else
+                            <td>{{number_format(0, 2, ',', '.')}}</td>
+                            <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
+                            @php
+                            $saldoawalkredit=$detail['saldo_awal'];
+                            $totalKredit += $detail['saldo_awal'];
+                        @endphp
+                            @endif
+                            <td>{{number_format($detail['kasbank_debit'], 2, ',', '.')}}</td>
+                            <td>{{number_format($detail['kasbank_kredit'], 2, ',', '.')}}</td>
+                            @php
+                            $totalkasbankDebit += $detail['kasbank_debit'];
+                            $totalkasbankKredit += $detail['kasbank_kredit'];
+                             @endphp
+                             <td>{{number_format($detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}</td>
+                             <td>{{number_format($detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}</td>
+                             @php
+                             $totalsampaibulaninikasbankDebit += $detail['sampaibulaninikasbank_debit'];
+                             $totalsampaibulaninikasbankKredit += $detail['sampaibulaninikasbank_kredit'];
+                              @endphp
+                              @if ($detail['jenis']=='debit')
+                              <td>
+                                {{number_format($saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}
+                                </td>
+                              <td>0</td>
+                              @php
+                              $jumlahtotaldebit += $saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'];
+                               @endphp
+                            @else 
+                            <td>0</td>
+                            <td>
+                                {{number_format($saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}
+                            </td> 
+                            @php
+                              $jumlahtotalkredit += $saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'];
+                               @endphp
+                              @endif
+                              <td>0</td>
+                        </tr>
                     @endforeach
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td colspan="10">======================================================================================================================</td>
-                    </tr> 
-                 <tr>
-                    <td>-</td>
-                    <td>Jumlah Nomor Bukti {{$dt["items"][0]["nomor_bukti"]}}</td>
-                    <td>{{$dt["debit"]}}</td>
-                    <td>{{$dt["kredit"]}}</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>  
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td colspan="10">======================================================================================================================</td>
-                </tr> 
+                        <td colspan="10" style="text-align: right;">============================================================================================================================================</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">Jumlah Perkiraan Utama :{{ $golongan }}</td>
+                        <td>{{ number_format($totalDebit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($totalKredit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($totalkasbankDebit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($totalkasbankKredit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($totalsampaibulaninikasbankDebit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($totalsampaibulaninikasbankKredit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($jumlahtotaldebit, 2, ',', '.') }}</td>
+                        <td>{{ number_format($jumlahtotalkredit, 2, ',', '.') }}</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" style="text-align: right;">============================================================================================================================================</td>
+                    </tr>
                 @endforeach
-                <tr>
-                    <td></td>
-                    <td>rekapitulasi</td>
-                    <td colspan="10"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>=================</td>
-                    <td colspan="10"></td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>Aktiva Benda Dan Modal</td>
-                    <td>{{$totalDebit}}</td>
-                    <td>{{$totalKredit}}</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Keuangan</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Persediaan Barang Bahan Perlengkapan</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Jenis Biaya Tahun Ini</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Tempat Biaya Tahun Ini</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Pendapatan Penghasilan Tahun Ini</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Laba Rugi Tahun Ini</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
                 </tbody>  
             </table>
            

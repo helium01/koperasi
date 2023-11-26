@@ -103,14 +103,14 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="cetak/neraca">NERACA</a>
+                                <a class="dropdown-item" href="/cetak/neraca/view">NERACA</a>
                                 <a class="dropdown-item" href="/cetak/neraca_lajur">Neraca Lajur</a>
                                 <a class="dropdown-item" href="/cetak/neraca_aktifa_pasifa">Neraca Aktifa Pasifa</a>
                                 <a class="dropdown-item" href="/cetak/laba_rugi">Laba Rugi</a>
                                 <a class="dropdown-item" href="/cetak/memorial_saldo_awal">Saldo Awal</a>
-                                <a class="dropdown-item" href="cetak/lembar_pemeriksaan">Lembar Pemeriksaan</a>
-                                <a class="dropdown-item" href="cetak/buku_besar/no_perkiraan">Buku Besar/Sub Buku Besar</a>
-                                <a class="dropdown-item" href="cetak/seluruh_kartu_bukubesar">Seluruh Kartu Buku Besar</a>
+                                <a class="dropdown-item" href="/cetak/lembar_pemeriksaan">Lembar Pemeriksaan</a>
+                                <a class="dropdown-item" href="/cetak/buku_besar/no_perkiraan">Buku Besar/Sub Buku Besar</a>
+                                <a class="dropdown-item" href="/cetak/seluruh_kartu_bukubesar">Seluruh Kartu Buku Besar</a>
                                 <a class="dropdown-item" href="/cetak/memorial_pemindah_bukuan">Memorial Pemindah Bukuan</a>
                             </div>
                         </li>

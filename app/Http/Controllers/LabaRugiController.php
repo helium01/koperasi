@@ -27,6 +27,10 @@ class LabaRugiController extends Controller
     // $pdf->loadHTML('<h1>Test</h1>');
     // return $pdf->stream();
     }
+    public function indexview()
+    {
+        return view('admin.cetak.laba_rugi.index');
+    }
 
     /**
      * Show the form for creating a new resource.

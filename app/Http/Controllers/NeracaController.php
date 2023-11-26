@@ -7,6 +7,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use App\Models\memorial;
+use App\Models\saldo_awal;
+use App\Models\nomor_perkiraan;
+use App\Models\data_kas_bank;
 
 class NeracaController extends Controller
 {
@@ -17,12 +20,66 @@ class NeracaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request);
+        $nomor_perkiraan = nomor_perkiraan::join('saldo_awals','saldo_awals.nomor_perkiraan','=','nomor_perkiraans.kode')->select('saldo_awals.*','nomor_perkiraans.*')->orderBy('kode', 'asc')->get();
+        
+// Inisialisasi array untuk menyimpan hasil per golongan
+$totalsPerGolongan = [];
+
+foreach ($nomor_perkiraan as $perkiraan) {
+    // Pisahkan kode menjadi golongan (misal: "080" menjadi "00")
+    $golongan = substr($perkiraan->kode, 0, 3);
+
+    // Tambahkan jumlah perkiraan utama ke array hasil per golongan
+    if (!isset($totalsPerGolongan[$golongan]['details'])) {
+        $totalsPerGolongan[$golongan]['details'] = [];
+    }
+    $data_kas_bank =data_kas_bank::where('nomor_perkiraan_lawan',$perkiraan->kode)->get();
+    if ($data_kas_bank->count() >0 ){
+        foreach($data_kas_bank as $data){
+            if($data->jenis=='Masuk'){
+                $debit=$data->jumlah_uang;
+            }else{
+                $kredit=$data->jumlah_uang;
+            }
+        }
+    }else{
+        $debit=0;
+        $kredit=0;
+    }
+
+    $totalsPerGolongan[$golongan]['details'][] = [
+        'kode' => $perkiraan->kode,
+        'uraian' => $perkiraan->uraian,
+        'jenis'=>$perkiraan->jenis,
+        'saldo_awal'=>$perkiraan->saldo_awal,
+        'kasbank_debit'=>$debit,
+        'kasbank_kredit'=>$kredit,
+        'sampaibulaninikasbank_debit'=>$debit,
+        'sampaibulaninikasbank_kredit'=>$kredit
+    ];
+}
+
+// Tampilkan hasil
+// foreach ($totalsPerGolongan as $golongan => $totalPerGolongan) {
+//     echo "Golongan: $golongan\n";
+//     foreach ($totalPerGolongan['details'] as $detail) {
+//         echo " - {$detail['kode']}: {$detail['uraian']}\n";
+//     }
+//     echo "\n";
+// }
+
+// Tampilkan hasil
+//  dd($totalsPerGolongan);
+return view('admin.cetak.neraca.neraca',compact('totalsPerGolongan'));
+        $saldo_awal=saldo_awal::join('nomor_perkiraans','nomor_perkiraans.kode','=','saldo_awals.nomor_perkiraan')->select('saldo_awals.*','nomor_perkiraans.*')->get();
+        dd($saldo_awal);
         $options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('isPhpEnabled', true);
-$pdf = new Dompdf($options);
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $pdf = new Dompdf($options);
         $image = file_get_contents(public_path('logo.jpg'));
         $base64 = 'data:image/png;base64,' . base64_encode($image);
         // return view('admin.cetak.neraca.neraca',compact('base64'));
@@ -77,9 +134,9 @@ $data = array_values($groupedData);
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function indexview()
     {
-        //
+        return view('admin.cetak.neraca.index');
     }
 
     /**

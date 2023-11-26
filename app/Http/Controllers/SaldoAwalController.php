@@ -26,6 +26,10 @@ class SaldoAwalController extends Controller
         // dd($debit);
         return view('admin.proses_awal.saldo_proses_awal.index', compact('saldo_awals','debit','kredit','status','selisih'));
     }
+    public function indexview()
+    {
+        return view('admin.cetak.neraca.index');
+    }
     public function index2($nomor)
     {
         $saldo_awals = saldo_awal::where('nomor_perkiraan',$nomor)->get();

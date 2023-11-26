@@ -78,6 +78,7 @@ route::get("/cetak/buku_besar/tanggal",[BukuBesarController::class,'index2']);
 route::get("/cetak/buku_besar/no_perkiraan",[BukuBesarController::class,'index']);
 route::get("/cetak/seluruh_kartu_bukubesar",[SeluruhKartuBukuBesarController::class,'index']);
 route::get("/cetak/neraca",[NeracaController::class,'index']);
+route::get("/cetak/neraca/view",[NeracaController::class,'indexview']);
 route::get("/cetak/neraca_aktifa_pasifa",[NeracaAktifaPasifaController::class,'index']);
 route::get("/cetak/neraca_lajur",[NeracaLajurController::class,'index']);
 route::get("/cetak/rincian_biaya",[RincianBiayaController::class,'index']);

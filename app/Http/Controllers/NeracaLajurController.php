@@ -22,6 +22,10 @@ class NeracaLajurController extends Controller
         return $pdf->download('neraca_lajur.pdf');
         // return view("admin.cetak.neraca_lajur.neraca",compact('base64'));
     }
+    public function indexview()
+    {
+        return view('admin.cetak.neraca_lajur.index');
+    }
 
     /**
      * Show the form for creating a new resource.

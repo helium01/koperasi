@@ -22,6 +22,10 @@ class NeracaAktifaPasifaController extends Controller
         return $pdf->download('neraca_aktifa_pasifa.pdf');
         // return view("admin.cetak.neraca_aktifa_pasifa.neraca",compact('base64'));
     }
+    public function indexview()
+    {
+        return view('admin.cetak.neraca_aktifa_pasifa.index');
+    }
 
     /**
      * Show the form for creating a new resource.
