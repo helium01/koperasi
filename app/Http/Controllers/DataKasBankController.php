@@ -76,7 +76,12 @@ class DataKasBankController extends Controller
 
     public function store(Request $request)
     {
-        data_kas_bank::create($request->all());
+        $data=data_kas_bank::where('nomor_perkiraan_lawan',$request->nomor_perkiraan_lawan)->first();
+        if(!$data){
+            data_kas_bank::create($request->all());
+        }else{
+            
+        }
         return response()->json([$request->all()]);
     }
 

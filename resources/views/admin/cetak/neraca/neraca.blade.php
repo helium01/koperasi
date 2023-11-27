@@ -20,7 +20,6 @@
                 width: 100%;
             }
             th, td {
-                border: 1px solid black;
                 padding: 8px;
                 text-align: center;
             }
@@ -101,89 +100,121 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($totalsPerGolongan as $golongan => $totalPerGolongan)
-                    @php
-                    $totalDebit = 0;
-                    $totalKredit = 0;
-                    $totalkasbankDebit=0;
-                    $totalkasbankKredit=0;
-                    $totalsampaibulaninikasbankDebit=0;
-                    $totalsampaibulaninikasbankKredit=0;
-                    $jumlahdebitsampaibulanini=0;
-                    $jumlahkreditsampaibulanini=0;
-                    $saldoawaldebit=0;
-                    $saldoawalkredit=0;
-                    $jumlahtotaldebit=0;
-                    $jumlahtotalkredit=0;
+                @foreach ($totalsPerGolongan as $golongan => $totalPerGolongan)
+                @php
+                    $totaldebitsaldoawal=0;
+                    $totalkreditsaldoawal=0;
+                    $totalkasbankdebitgolongan=0;
+                    $totalkasbankkreditgolongan=0;
+                    $totalsampaibulaninikasbankdebitgolongan=0;
+                    $totalsampaibulaninikasbankkreditgolongan=0;
+                    $totaljumlahdebitsampaibulaninigolongan=0;
+                    $totaljumlahkreditsampebulaninigolongan=0;
                 @endphp
-                    @foreach ($totalPerGolongan['details'] as $detail)
-                        <tr>
-                            <td style="text-align: left;">{{ $detail['kode'] }} |{{ $detail['uraian'] }}</td>
-                            @if ($detail['jenis']=='debit')
-                                <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
-                                <td>{{number_format(0, 2, ',', '.')}}</td>
-                        @php
-                        $saldoawaldebit=$detail['saldo_awal'];
-                            $totalDebit += $detail['saldo_awal'];
-                        @endphp
-                            @else
-                            <td>{{number_format(0, 2, ',', '.')}}</td>
-                            <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
-                            @php
-                            $saldoawalkredit=$detail['saldo_awal'];
-                            $totalKredit += $detail['saldo_awal'];
-                        @endphp
-                            @endif
-                            <td>{{number_format($detail['kasbank_debit'], 2, ',', '.')}}</td>
-                            <td>{{number_format($detail['kasbank_kredit'], 2, ',', '.')}}</td>
-                            @php
-                            $totalkasbankDebit += $detail['kasbank_debit'];
-                            $totalkasbankKredit += $detail['kasbank_kredit'];
-                             @endphp
-                             <td>{{number_format($detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}</td>
-                             <td>{{number_format($detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}</td>
-                             @php
-                             $totalsampaibulaninikasbankDebit += $detail['sampaibulaninikasbank_debit'];
-                             $totalsampaibulaninikasbankKredit += $detail['sampaibulaninikasbank_kredit'];
-                              @endphp
-                              @if ($detail['jenis']=='debit')
-                              <td>
-                                {{number_format($saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}
-                                </td>
-                              <td>0</td>
-                              @php
-                              $jumlahtotaldebit += $saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'];
-                               @endphp
-                            @else 
-                            <td>0</td>
-                            <td>
-                                {{number_format($saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}
-                            </td> 
-                            @php
-                              $jumlahtotalkredit += $saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'];
-                               @endphp
-                              @endif
-                              <td>0</td>
-                        </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="10" style="text-align: right;">============================================================================================================================================</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">Jumlah Perkiraan Utama :{{ $golongan }}</td>
-                        <td>{{ number_format($totalDebit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($totalKredit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($totalkasbankDebit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($totalkasbankKredit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($totalsampaibulaninikasbankDebit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($totalsampaibulaninikasbankKredit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($jumlahtotaldebit, 2, ',', '.') }}</td>
-                        <td>{{ number_format($jumlahtotalkredit, 2, ',', '.') }}</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td colspan="10" style="text-align: right;">============================================================================================================================================</td>
-                    </tr>
+                   
+                @foreach ($totalPerGolongan as $golongan2=>$total)
+                @php
+                $totalDebit = 0;
+                $totalKredit = 0;
+                $totalkasbankDebit=0;
+                $totalkasbankKredit=0;
+                $totalsampaibulaninikasbankDebit=0;
+                $totalsampaibulaninikasbankKredit=0;
+                $jumlahdebitsampaibulanini=0;
+                $jumlahkreditsampaibulanini=0;
+                $saldoawaldebit=0;
+                $saldoawalkredit=0;
+                $jumlahtotaldebit=0;
+                $jumlahtotalkredit=0;
+            @endphp
+                @foreach ($totalPerGolongan[$golongan2]['details'] as $detail)
+                <tr>
+                    <td style="text-align: left;">{{ $detail['kode'] }} |{{ $detail['uraian'] }}</td>
+                    @if ($detail['jenis']=='debit')
+                        <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
+                        <td>{{number_format(0, 2, ',', '.')}}</td>
+                @php
+                $saldoawaldebit=$detail['saldo_awal'];
+                    $totalDebit += $detail['saldo_awal'];
+                @endphp
+                    @else
+                    <td>{{number_format(0, 2, ',', '.')}}</td>
+                    <td>{{number_format($detail['saldo_awal'], 2, ',', '.')}}</td>
+                    @php
+                    $saldoawalkredit=$detail['saldo_awal'];
+                    $totalKredit += $detail['saldo_awal'];
+                @endphp
+                    @endif
+                    <td>{{number_format($detail['kasbank_debit'], 2, ',', '.')}}</td>
+                    <td>{{number_format($detail['kasbank_kredit'], 2, ',', '.')}}</td>
+                    @php
+                    $totalkasbankDebit += $detail['kasbank_debit'];
+                    $totalkasbankKredit += $detail['kasbank_kredit'];
+                     @endphp
+                     <td>{{number_format($detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}</td>
+                     <td>{{number_format($detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}</td>
+                     @php
+                     $totalsampaibulaninikasbankDebit += $detail['sampaibulaninikasbank_debit'];
+                     $totalsampaibulaninikasbankKredit += $detail['sampaibulaninikasbank_kredit'];
+                      @endphp
+                      @if ($detail['jenis']=='debit')
+                      <td>
+                        {{number_format($saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'], 2, ',', '.')}}
+                        </td>
+                      <td>0</td>
+                      @php
+                      $jumlahtotaldebit += $saldoawaldebit+$detail['sampaibulaninikasbank_debit']-$detail['sampaibulaninikasbank_kredit'];
+                       @endphp
+                    @else 
+                    <td>0</td>
+                    <td>
+                        {{number_format($saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'], 2, ',', '.')}}
+                    </td> 
+                    @php
+                      $jumlahtotalkredit += $saldoawalkredit+$detail['sampaibulaninikasbank_kredit']-$detail['sampaibulaninikasbank_debit'];
+                       @endphp
+                      @endif
+                      <td>0</td>
+                </tr>
+            @endforeach
+            <tr>
+                <td colspan="10" style="text-align: right;">================================================================================================================================</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Jumlah Perkiraan Utama :{{ $golongan2 }}</td>
+                <td>{{ number_format($totalDebit, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalKredit, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalkasbankDebit, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalkasbankKredit, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalsampaibulaninikasbankDebit, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalsampaibulaninikasbankKredit, 2, ',', '.') }}</td>
+                <td>{{ number_format($jumlahtotaldebit, 2, ',', '.') }}</td>
+                <td>{{ number_format($jumlahtotalkredit, 2, ',', '.') }}</td>
+                <td>0</td>
+                @php
+                    $totaldebitsaldoawal+=$totalDebit;
+                    $totalkreditsaldoawal+=$totalKredit;
+                    $totalkasbankdebitgolongan+=$totalkasbankDebit;
+                    $totalkasbankkreditgolongan+=$totalkasbankKredit;
+                    $totalsampaibulaninikasbankdebitgolongan+=$totalsampaibulaninikasbankDebit;
+                    $totalsampaibulaninikasbankkreditgolongan+=$totalsampaibulaninikasbankKredit;
+                    $totaljumlahdebitsampaibulaninigolongan+=$jumlahtotaldebit;
+                    $totaljumlahkreditsampebulaninigolongan+=$jumlahtotalkredit;
+                @endphp
+            </tr>
+            <tr>
+                <td colspan="10" style="text-align: right;">================================================================================================================================</td>
+            </tr>
+                @endforeach
+                <td style="text-align: left;">Jumlah Golongan :{{ $golongan }}</td>
+                <td>{{ number_format($totaldebitsaldoawal, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalkreditsaldoawal, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalkasbankdebitgolongan, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalkasbankkreditgolongan, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalsampaibulaninikasbankdebitgolongan, 2, ',', '.') }}</td>
+                <td>{{ number_format($totalsampaibulaninikasbankkreditgolongan, 2, ',', '.') }}</td>
+                <td>{{ number_format($totaljumlahdebitsampaibulaninigolongan, 2, ',', '.') }}</td>
+                <td>{{ number_format($totaljumlahkreditsampebulaninigolongan, 2, ',', '.') }}</td>
                 @endforeach
                 </tbody>  
             </table>
