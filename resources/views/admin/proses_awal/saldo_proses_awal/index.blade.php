@@ -9,6 +9,23 @@
     </div>
     <!-- row -->
     <div class="row tm-content-row">
+        <form action="/rab_tahunans" method="GET">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Cari..." name="search">
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="submit">Cari</button>
+              </div>
+            </div>
+          </form>
+          <form action="/import/saldo_awal" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group mb-3">
+              <input type="file" class="form-control" placeholder="Cari..." name="import">
+              <div class="input-group-append">
+                <button class="btn btn-info" type="submit">Import Data</button>
+              </div>
+            </div>
+          </form>
         <a href="/saldo_awals/create" class="btn btn-primary mb-3">Create Data</a>
         <table class="table table-bordered">
             <thead class="thead-dark">

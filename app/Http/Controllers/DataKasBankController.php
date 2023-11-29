@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\data_kas_bank;
 use Illuminate\Http\Request;
 use App\Models\nomor_perkiraan;
+use App\Imports\datakasbankimport;
 
 class DataKasBankController extends Controller
 {
@@ -76,12 +77,7 @@ class DataKasBankController extends Controller
 
     public function store(Request $request)
     {
-        $data=data_kas_bank::where('nomor_perkiraan_lawan',$request->nomor_perkiraan_lawan)->first();
-        if(!$data){
             data_kas_bank::create($request->all());
-        }else{
-            
-        }
         return response()->json([$request->all()]);
     }
 
@@ -119,5 +115,16 @@ class DataKasBankController extends Controller
     {
         $data_kas_bank=data_kas_bank::where("nomor_bukti",$id)->delete();
         return redirect()->route('data_kas_banks.index');
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        $file = $request->file('import');
+
+        Excel::import(new datakasbankimport, $file);
+        return redirect('/data_kas_bank');
     }
 }

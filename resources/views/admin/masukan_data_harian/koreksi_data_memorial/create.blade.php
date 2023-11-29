@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Submit"></td>
-                <td colspan="2"><a class="btn btn-primary" href="/data_kas_banks">selesai</a>
+                <td colspan="2"><a class="btn btn-primary" href="/memorials">selesai</a>
                 </td>
             </tr>
         </table>

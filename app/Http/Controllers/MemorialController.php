@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\memorial;
 use Illuminate\Http\Request;
 use App\Models\nomor_perkiraan;
+use App\Imports\memorialmport;
 
 class MemorialController extends Controller
 {
@@ -160,5 +161,16 @@ class MemorialController extends Controller
     {
         $memorial=memorial::where("nomor_bukti",$id)->delete();
         return redirect()->route('memorials.index');
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        $file = $request->file('import');
+
+        Excel::import(new memorialimport, $file);
+        return redirect('/data_kas_bank');
     }
 }

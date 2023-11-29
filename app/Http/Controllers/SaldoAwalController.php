@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\saldo_awal;
 use Illuminate\Http\Request;
+use App\Imports\prosessaldoawalimport;
 
 class SaldoAwalController extends Controller
 {
@@ -80,5 +81,16 @@ class SaldoAwalController extends Controller
     {
         $saldo_awal->delete();
         return redirect()->route('saldo_awals.index');
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        $file = $request->file('import');
+
+        Excel::import(new prosessaldoawalimport, $file);
+        return redirect('/data_kas_bank');
     }
 }

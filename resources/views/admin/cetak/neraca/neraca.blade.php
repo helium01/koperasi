@@ -215,6 +215,9 @@
                 <td>{{ number_format($totalsampaibulaninikasbankkreditgolongan, 2, ',', '.') }}</td>
                 <td>{{ number_format($totaljumlahdebitsampaibulaninigolongan, 2, ',', '.') }}</td>
                 <td>{{ number_format($totaljumlahkreditsampebulaninigolongan, 2, ',', '.') }}</td>
+                <tr>
+                    <td colspan="10" style="text-align: right;">================================================================================================================================</td>
+                </tr>
                 @endforeach
                 </tbody>  
             </table>

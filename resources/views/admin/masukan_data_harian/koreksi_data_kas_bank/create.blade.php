@@ -47,12 +47,8 @@
             <tr>
                 <td>Nomor Perkiraan:</td>
                 <td>
-                    <select   name="nomor_perkiraan" required >
-                        <option value="" disabled selected>Pilih Nomor Perkiraan</option>
-                        @foreach($nomor_perkiraan as $nomor)
-                            <option value="{{ $nomor->kode }}">{{ $nomor->kode }} |{{$nomor->uraian}}</option>
-                        @endforeach
-                    </select>
+                    <input type="text"  id="nomor_perkiraan2" maxlength="10" name="nomor_perkiraan" required onchange="getNamaPerkiraan()">
+                    <div id="searchResults2" class="mt-2"></div>
                 </td>
             </tr>
             <tr>
@@ -225,5 +221,50 @@ $('#nama_perkiraan').val(uraian);
         });
             });
         </script>
+<script>
+    $(document).ready(function () {
+        $('#nomor_perkiraan2').on('input', function () {
+            var nomorPerkiraan = $(this).val();
+
+            // Kirim permintaan Ajax ke server
+            $.ajax({
+                url: '/get-nama-perkiraan/' + nomorPerkiraan,
+                type: 'GET',
+                success: function (data) {
+                     // Kosongkan elemen searchResults sebelum menambahkan data baru
+                     $('#searchResults2').empty();
+
+                    // Iterasi melalui data dan tambahkan elemen div untuk setiap item
+                    $.each(data, function (index, item) {
+                        $('#searchResults2').append('<div class="dropdown-item">' + item.kode + ' | ' + item.uraian + '</div>');
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('#searchResults2').on('click', '.dropdown-item', function () {
+    // Get the text content of the clicked item
+    var selectedItemText = $(this).text();
+    var parts = selectedItemText.split('|').map(function (part) {
+return part.trim();
+});
+
+    // Extract nomor_perkiraan from the text (assuming it is separated by '|')
+    var nomorPerkiraan = selectedItemText.split('|')[0].trim();
+
+    // Set the value of nomor_perkiraan input
+    $('#nomor_perkiraan2').val(nomorPerkiraan);
+// Extract uraian from the data attribute
+var uraian = parts[1];
+console.log(uraian);
+// Set the value of nama_perkiraan input
+$('#nama_perkiraan2').val(uraian);
+    // Clear the dropdown after selecting an item (optional)
+    $('#searchResults2').empty();
+});
+    });
+</script>
 @endsection
 

@@ -11,6 +11,17 @@
     <div class="row ">
         <div class="row">
             <div class="col">
+                <form action="/import/data_kas_bank" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control" placeholder="Cari..." name="import">
+                    <div class="input-group-append">
+                      <button class="btn btn-info" type="submit">Import Data</button>
+                    </div>
+                  </div>
+                </form>
+          </div>
+            <div class="col">
                 <a href="/data_kas_banks/create" class="btn btn-primary mb-3">Tambahkan Data</a>
             </div>
         </div>

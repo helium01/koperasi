@@ -39,21 +39,25 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('rab_tahunans', RabTahunanController::class);
+Route::post('/import/rab_tahunan', [RabTahunanController::class,'import']);
 
 Route::resource('saldo_awals', SaldoAwalController::class);
 Route::get('saldo_awal/{nomor}', [SaldoAwalController::class,'index2']);
+Route::post('/import/saldo_awal', [SaldoAwalController::class,'import']);
 
 Route::resource('data_kas_banks', DataKasBankController::class);
 Route::get('/api/data_kas_banks/{no_bukti}', [DataKasBankController::class,'index2']);
 Route::get('/data_kas_banks/edit/{no_bukti}', [DataKasBankController::class,'edit2']);
 Route::get('/data_kas_banks/delete/{id}', [DataKasBankController::class,'destroy']);
 Route::get('/data_kas_banks/hapus/{id}', [DataKasBankController::class,'destroy2']);
+Route::post('/import/data_kas_bank', [DataKasBankController::class,'import']);
 
 Route::resource('memorials', MemorialController::class);
 Route::get('api/memorials/{no_bukti}', [MemorialController::class,'index2']);
 Route::get('/memorials/edit/{no_bukti}', [MemorialController::class,'edit2']);
 Route::get('/memorials/delete/{id}', [MemorialController::class,'destroy']);
 Route::get('/memorials/hapus/{id}', [MemorialController::class,'destroy2']);
+Route::post('/import/memorial', [MemorialController::class,'import']);
 
 Route::resource('suplements', SuplementController::class);
 Route::get('api/suplements/{no_bukti}', [SuplementController::class,'index2']);

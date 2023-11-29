@@ -22,9 +22,17 @@ class NeracaController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request);
-        $memori=memorial::join('nomor_perkiraans','nomor_perkiraans.kode','=','memorials.nomor_perkiraan')->get(); 
-        //dd($memori);
+        $memori_bulanini=memorial::join('nomor_perkiraans','nomor_perkiraans.kode','=','memorials.nomor_perkiraan')
+        ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+        ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+        ->get(); 
+        //dd($memori_bulanini);
+        $memori=memorial::join('nomor_perkiraans','nomor_perkiraans.kode','=','memorials.nomor_perkiraan')
+        ->get(); 
+        $datakasbank=data_kas_bank::join('nomor_perkiraans','nomor_perkiraans.kode','=','data_kas_banks.nomor_perkiraan_lawan')->get(); 
+        foreach($datakasbank as $datakas){
+            
+        }
         foreach($memori as $memo){
             $saldo_awal=saldo_awal::where('nomor_perkiraan',$memo->nomor_perkiraan)->first();
             if(!$saldo_awal){
@@ -43,6 +51,10 @@ class NeracaController extends Controller
 $totalsPerGolongan = [];
 $debit=0;
 $kredit=0;
+$debitmemorial=0;
+$kreditmemorial=0;
+$jumlahdatakredit=0;
+$jumlahdatadebit=0;
 
 foreach ($nomor_perkiraan as $perkiraan) {
     // Pisahkan kode menjadi golongan (misal: "080" menjadi "00")
@@ -54,41 +66,43 @@ foreach ($nomor_perkiraan as $perkiraan) {
     if (!isset($totalsPerGolongan[$golongan2][$golongan]['details'])) {
         $totalsPerGolongan[$golongan2][$golongan]['details'] = [];
     }
-    $data_kas_bank =data_kas_bank::where('nomor_perkiraan_lawan',$perkiraan->kode)->get();
-    if ($data_kas_bank->count() >0 ){
-        foreach($data_kas_bank as $data){
-            if($data->jenis=='Masuk'){
-                $debit=$data->jumlah_uang;
-            }else{
-                $kredit=$data->jumlah_uang;
-            }
+        $debit=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Masuk')->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','debit')->sum('jumlah_uang');
+        $kredit=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Keluar')->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','kredit')->sum('jumlah_uang');
+        $debit_total=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Masuk')
+        ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+        ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+        ->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','debit')
+        ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+        ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+        ->sum('jumlah_uang');
+        $kredit_total=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Keluar')
+        ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+        ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+        ->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','kredit')
+        ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+        ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+        ->sum('jumlah_uang');
+        $data=data_kas_bank::where('nomor_perkiraan',$perkiraan->kode)->get();
+        if($data->count()>0){
+            $kredit=data_kas_bank::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','Masuk')->sum('jumlah_uang');
+            $debit=data_kas_bank::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','Keluar')->sum('jumlah_uang');   
+            $kredit=data_kas_bank::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','Masuk')
+            ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+            ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+            ->sum('jumlah_uang');
+            $debit=data_kas_bank::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','Keluar')
+            ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
+            ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
+            ->sum('jumlah_uang');
         }
-    }else{
-        $debit=0;
-        $kredit=0;
-    }
-    $memorial=memorial::where('nomor_perkiraan',$perkiraan->kode)->get();
-    if($memorial->count()>0){
-        foreach($memorial as $memori){
-            $kasbank=data_kas_bank::where('nomor_perkiraan',$memori->nomor_perkiraan)->first();
-           if($memori->jenis=='debit'){
-            $debit=$memori->jumlah_uang;
-           }else if($memori->jenis=='kredit '){
-            $kredit=$memori->jumlah_uang;
-           }
-        }
-    }else{
-        $debit=0;
-        $kredit=0;
-    }
-
+   
     $totalsPerGolongan[$golongan2][$golongan]['details'][] = [
         'kode' => $perkiraan->kode,
         'uraian' => $perkiraan->uraian,
         'jenis'=>$perkiraan->jenis,
         'saldo_awal'=>$perkiraan->saldo_awal,
-        'kasbank_debit'=>$debit,
-        'kasbank_kredit'=>$kredit,
+        'kasbank_debit'=>$debit_total,
+        'kasbank_kredit'=>$kredit_total,
         'sampaibulaninikasbank_debit'=>$debit,
         'sampaibulaninikasbank_kredit'=>$kredit
     ];

@@ -19,6 +19,7 @@
                 <label for="tanggal">Tanggal:</label>
                 <input type="date" class="form-control" id="tanggal" name="tanggal" required>
               </div>
+              
         
               <button type="submit" class="btn btn-primary" >Submit</button>
             </form>
