@@ -31,7 +31,28 @@ class NeracaController extends Controller
         ->get(); 
         $datakasbank=data_kas_bank::join('nomor_perkiraans','nomor_perkiraans.kode','=','data_kas_banks.nomor_perkiraan_lawan')->get(); 
         foreach($datakasbank as $datakas){
-            
+            $saldo_awal=saldo_awal::where('nomor_perkiraan',$datakas->nomor_perkiraan_lawan)->first();
+            //dd($datakas);
+            if(!$saldo_awal){
+                if($datakas->jenis=='Masuk'){
+                    saldo_awal::create([
+                        'nomor_perkiraan'=>$datakas->nomor_perkiraan_lawan,
+                        'nama_perkiraan'=>$datakas->uraian,
+                        'jenis'=>'kredit',
+                        'saldo_awal'=>0,
+                        'created_by'=>$datakas->created_by
+                    ]);
+                }else{
+                    saldo_awal::create([
+                        'nomor_perkiraan'=>$datakas->nomor_perkiraan_lawan,
+                        'nama_perkiraan'=>$datakas->uraian,
+                        'jenis'=>'debit',
+                        'saldo_awal'=>0,
+                        'created_by'=>$datakas->created_by
+                    ]);
+                }
+                
+            }
         }
         foreach($memori as $memo){
             $saldo_awal=saldo_awal::where('nomor_perkiraan',$memo->nomor_perkiraan)->first();
@@ -46,6 +67,22 @@ class NeracaController extends Controller
             }
         }
         $nomor_perkiraan = nomor_perkiraan::join('saldo_awals','saldo_awals.nomor_perkiraan','=','nomor_perkiraans.kode')->select('saldo_awals.*','nomor_perkiraans.*')->orderBy('kode', 'asc')->get();
+        $pemindahbukuan=data_kas_bank::where('nomor_perkiraan_lawan','like','400%')->sum('jumlah_uang')+memorial::where('nomor_perkiraan','like','400%')->sum('jumlah_uang');
+        $nomorkira=nomor_perkiraan::where('kode','491.00')->first();
+        if($pemindahbukuan>0){
+            $awal=saldo_awal::where('nomor_perkiraan',$nomorkira->kode)->first();
+            if(!$awal){
+                dd('sini');
+                saldo_awal::create([
+                    'nomor_perkiraan'=>$nomorkira->kode,
+                    'nama_perkiraan'=>$nomorkira->uraian,
+                    'jenis'=>'kredit',
+                    'saldo_awal'=>0,
+                    'created_by'=>$memo->created_by
+                ]);
+
+            }
+        }
        
 // Inisialisasi array untuk menyimpan hasil per golongan
 $totalsPerGolongan = [];
@@ -60,11 +97,12 @@ foreach ($nomor_perkiraan as $perkiraan) {
     // Pisahkan kode menjadi golongan (misal: "080" menjadi "00")
     $golongan = substr($perkiraan->kode, 0, 3);
     $golongan2=substr($perkiraan->kode,0,2);
+    $golongan3=substr($perkiraan->kode,0,1);
 
 
     // Tambahkan jumlah perkiraan utama ke array hasil per golongan
-    if (!isset($totalsPerGolongan[$golongan2][$golongan]['details'])) {
-        $totalsPerGolongan[$golongan2][$golongan]['details'] = [];
+    if (!isset($totalsPerGolongan[$golongan3][$golongan2][$golongan]['details'])) {
+        $totalsPerGolongan[$golongan3][$golongan2][$golongan]['details'] = [];
     }
         $debit=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Masuk')->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','debit')->sum('jumlah_uang');
         $kredit=data_kas_bank::where('nomor_perkiraan_lawan', $perkiraan->kode)->where('jenis', 'Keluar')->sum('jumlah_uang')+memorial::where('nomor_perkiraan',$perkiraan->kode)->where('jenis','kredit')->sum('jumlah_uang');
@@ -96,7 +134,7 @@ foreach ($nomor_perkiraan as $perkiraan) {
             ->sum('jumlah_uang');
         }
    
-    $totalsPerGolongan[$golongan2][$golongan]['details'][] = [
+    $totalsPerGolongan[$golongan3][$golongan2][$golongan]['details'][] = [
         'kode' => $perkiraan->kode,
         'uraian' => $perkiraan->uraian,
         'jenis'=>$perkiraan->jenis,
