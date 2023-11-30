@@ -643,7 +643,7 @@ $totals=[
 
 
 
-dd($totals);
+//dd($totals);
         return view('admin.cetak.neraca.neraca',compact('totalsPerGolongan'));
         $saldo_awal=saldo_awal::join('nomor_perkiraans','nomor_perkiraans.kode','=','saldo_awals.nomor_perkiraan')->select('saldo_awals.*','nomor_perkiraans.*')->get();
         dd($saldo_awal);
