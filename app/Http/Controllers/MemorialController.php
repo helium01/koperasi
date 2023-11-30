@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\memorial;
 use Illuminate\Http\Request;
 use App\Models\nomor_perkiraan;
-use App\Imports\memorialmport;
+use App\Imports\datamemorialimport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemorialController extends Controller
 {
@@ -170,7 +171,7 @@ class MemorialController extends Controller
 
         $file = $request->file('import');
 
-        Excel::import(new memorialimport, $file);
-        return redirect('/data_kas_bank');
+        Excel::import(new datamemorialimport, $file);
+        return redirect('/memorials');
     }
 }

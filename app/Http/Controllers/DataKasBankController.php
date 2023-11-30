@@ -6,6 +6,7 @@ use App\Models\data_kas_bank;
 use Illuminate\Http\Request;
 use App\Models\nomor_perkiraan;
 use App\Imports\datakasbankimport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataKasBankController extends Controller
 {
@@ -118,6 +119,7 @@ class DataKasBankController extends Controller
     }
     public function import(Request $request)
     {
+       // dd($request);
         $request->validate([
             'import' => 'required|mimes:xlsx,xls,csv',
         ]);
@@ -125,6 +127,6 @@ class DataKasBankController extends Controller
         $file = $request->file('import');
 
         Excel::import(new datakasbankimport, $file);
-        return redirect('/data_kas_bank');
+        return redirect('/data_kas_banks');
     }
 }

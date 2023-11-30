@@ -6,6 +6,7 @@ use App\Models\rab_tahunan;
 use App\Models\nomor_perkiraan;
 use Illuminate\Http\Request;
 use App\Imports\rabtahunanimport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RabTahunanController extends Controller
 {
@@ -13,9 +14,9 @@ class RabTahunanController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $rab_tahunans = Rab_tahunan::all();
+        $rab_tahunans = Rab_tahunan::where('tahun','like','%'.$request->search.'%')->get();
         return view('admin.proses_awal.rab_tahunan.index', compact('rab_tahunans'));
     }
 
@@ -56,5 +57,16 @@ class RabTahunanController extends Controller
     {
         $rab_tahunan->delete();
         return redirect()->route('rab_tahunans.index');
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        $file = $request->file('import');
+
+        Excel::import(new rabtahunanimport, $file);
+        return redirect('/rab_tahunans');
     }
 }

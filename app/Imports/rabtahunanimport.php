@@ -22,10 +22,11 @@ class rabtahunanimport implements ToModel, WithHeadingRow
         if ($existingData) {
             $existingData->delete();
         }
+        // dd($row);
         return new rab_tahunan([
             'tahun'=>$row['tahun'],
             'nomor_perkiraan'=>$row['nomor_perkiraan'],
-            'nama_perkiraan'=>$row['nama_perkriaan'],
+            'nama_perkiraan'=>$row['nama_perkiraan'],
             'rab_januari'=>$row['rab_januari'],
             'rab_februari'=>$row['rab_februari'],
             'rab_maret'=>$row['rab_maret'],

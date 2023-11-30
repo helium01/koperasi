@@ -251,11 +251,45 @@
                         <td>{{ number_format($totalsampaibulaninikasbankkreditgolongan_rubik, 2, ',', '.') }}</td>
                         <td>{{ number_format($totaljumlahdebitsampaibulaninigolongan_rubik, 2, ',', '.') }}</td>
                         <td>{{ number_format($totaljumlahkreditsampebulaninigolongan_rubik, 2, ',', '.') }}</td>
+                        @php
+                            
+                        @endphp
                     </tr>
                     <tr>
                         <td colspan="10" style="text-align: right;">================================================================================================================================</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td>
+                            REKAPITULASI
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ============================
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">0  AKTIVA BENDA DAN MODAL</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">1  KEUANGAN</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">3  PERSEDIAAN BAHAN BRG. PERLENGKAPAN</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">4  JENIS BIAYA TAHUN INI</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">6  TEMPAT BIAYA TAHUN INI</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">8  PENDAP/PENGHAS TAHUN INI</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">9  LABA/RUGI TAHUN INI</td>
+                    </tr>
                
                 </tbody>  
             </table>

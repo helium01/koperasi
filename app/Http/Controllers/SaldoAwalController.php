@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\saldo_awal;
 use Illuminate\Http\Request;
 use App\Imports\prosessaldoawalimport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaldoAwalController extends Controller
 {
@@ -12,9 +13,9 @@ class SaldoAwalController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $saldo_awals = saldo_awal::all();
+        $saldo_awals = saldo_awal::where('nomor_perkiraan','like','%'.$request->search.'%')->get();
         $debit=saldo_awal::where('jenis','debit')->sum('saldo_awal');
         $kredit=saldo_awal::where('jenis','kredit')->sum('saldo_awal');
         if($debit!=$kredit){
@@ -91,6 +92,6 @@ class SaldoAwalController extends Controller
         $file = $request->file('import');
 
         Excel::import(new prosessaldoawalimport, $file);
-        return redirect('/data_kas_bank');
+        return redirect('/saldo_awals');
     }
 }

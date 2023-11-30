@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Models\data_kas_bank;
-
+use Carbon\Carbon;
 
 class datakasbankimport implements ToModel, WithHeadingRow
 {
@@ -22,8 +22,9 @@ class datakasbankimport implements ToModel, WithHeadingRow
         if ($existingData) {
             $existingData->delete();
         }
+        //dd(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal']));
         return new data_kas_bank([
-            'tanggal' => $row['tanggal'],
+            'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal']),
             'jenis' => $row['jenis'],
             'nomor_bukti' => $row['nomor_bukti'],
             'nomor_perkiraan' => $row['nomor_perkiraan'],

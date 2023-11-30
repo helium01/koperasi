@@ -9,7 +9,7 @@
     </div>
     <!-- row -->
     <div class="row tm-content-row">
-        <form action="/rab_tahunans" method="GET">
+        <form action="/saldo_awals" method="GET">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Cari..." name="search">
               <div class="input-group-append">
