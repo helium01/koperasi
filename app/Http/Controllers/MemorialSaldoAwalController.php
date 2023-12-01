@@ -25,6 +25,11 @@ class MemorialSaldoAwalController extends Controller
         return view("admin.cetak.memorial_saldo_awal.sub_perkiraan");
         //
     }
+    public function indexview()
+    {
+        return view("admin.cetak.memorial_saldo_awal.index");
+        //
+    }
 
     /**
      * Show the form for creating a new resource.

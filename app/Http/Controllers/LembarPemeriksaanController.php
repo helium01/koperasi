@@ -26,6 +26,10 @@ class LembarPemeriksaanController extends Controller
     {
         return view("admin.cetak.lembar_pemeriksaan.lp_memorial");
     }
+    public function indexview()
+    {
+        return view("admin.cetak.lembar_pemeriksaan.index");
+    }
 
     /**
      * Show the form for creating a new resource.

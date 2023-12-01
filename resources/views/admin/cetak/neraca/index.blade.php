@@ -12,7 +12,11 @@
         
         <div class="container mt-5">
             <h2 class="mb-4">Pilih Tanggal dan Tahun</h2>
-        
+            @if(session('pesan'))
+            <div class="alert alert-success">
+                {{ session('pesan') }}
+            </div>
+        @endif
             <form id="myForm" method="get" action="/cetak/neraca">
               @csrf
               <div class="form-group">

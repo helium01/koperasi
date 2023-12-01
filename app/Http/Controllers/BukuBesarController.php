@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\data_kas_bank;
 
 class BukuBesarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $image = file_get_contents(public_path('logo.jpg'));
         $base64 = 'data:image/png;base64,' . base64_encode($image);
@@ -19,9 +20,24 @@ class BukuBesarController extends Controller
         return view("");
         //
     }
-    public function index2()
+    public function index2(Request $request)
     {
+        //dd($request);
+        // Ambil tanggal awal dan akhir dari request
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        // Lakukan query menggunakan where untuk memfilter berdasarkan rentang tanggal
+        $kasbank = data_kas_bank::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
+        dd($kasbank);
         return view("admin.cetak.buku_besar.urut_tanggal");
+        //
+    }
+    public function indexview(Request $request)
+    {
+        $image = file_get_contents(public_path('logo.jpg'));
+        $base64 = 'data:image/png;base64,' . base64_encode($image);
+        return view("admin.cetak.buku_besar.urut_no_perkiraan",compact('request','base64'));
         //
     }
 

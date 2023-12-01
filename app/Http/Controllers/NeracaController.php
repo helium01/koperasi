@@ -539,7 +539,12 @@ class NeracaController extends Controller
 
         // dd($debit_total->count());
         if($nomor_perkiraan->count()==0){
-            return redirect()->back();
+            $pesan = 'Operasi berhasil dilakukan!';
+
+            // Simpan pesan ke dalam session
+            session()->flash('pesan', $pesan);
+            // dd($pesan);
+            return redirect::back();
         }
 foreach ($nomor_perkiraan as $perkiraan) {
     // Pisahkan kode menjadi golongan (misal: "080" menjadi "00")
@@ -583,6 +588,10 @@ foreach ($nomor_perkiraan as $perkiraan) {
         }
         // dd($debit_total);
         if($debit_total==0 || $kredit_total==0){
+            $pesan = 'tidak terdapat data yang akan di cetak tolong pilih data yang sesuai';
+
+            // Simpan pesan ke dalam session
+            session()->flash('pesan', $pesan);
             return redirect()->back();
         }
    

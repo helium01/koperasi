@@ -26,6 +26,10 @@ class SeluruhKartuBukuBesarController extends Controller
     {
         return view("admin.cetak.seluruh_kartu_buku_besar.urut_tanggal");
     }
+    public function indexview()
+    {
+        return view("admin.cetak.seluruh_kartu_buku_besar.index");
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -77,10 +77,14 @@ Route::post('/import/no_perkiraan', [NomorPerkiraanController::class,'import']);
 Route::get('/get-nama-perkiraan/{nomorPerkiraan}', [NomorPerkiraanController::class,'getNamaPerkiraan']);
 
 route::get("/cetak/laba_rugi",[LabaRugiController::class,'index']);
+route::get("/cetak/laba_rugi/view",[LabaRugiController::class,'indexview']);
 route::get("/cetak/lembar_pemeriksaan",[LembarPemeriksaanController::class,'index']);
+route::get("/cetak/lembar_pemeriksaan/view",[LembarPemeriksaanController::class,'indexview']);
 route::get("/cetak/buku_besar/tanggal",[BukuBesarController::class,'index2']);
 route::get("/cetak/buku_besar/no_perkiraan",[BukuBesarController::class,'index']);
+route::get("/cetak/buku_besar/no_perkiraan/view",[BukuBesarController::class,'indexview']);
 route::get("/cetak/seluruh_kartu_bukubesar",[SeluruhKartuBukuBesarController::class,'index']);
+route::get("/cetak/seluruh_kartu_bukubesar/view",[SeluruhKartuBukuBesarController::class,'indexview']);
 route::get("/cetak/neraca",[NeracaController::class,'index']);
 route::get("/cetak/neraca/view",[NeracaController::class,'indexview']);
 route::get("/cetak/neraca_aktifa_pasifa",[NeracaAktifaPasifaController::class,'index']);
@@ -92,7 +96,9 @@ route::get("/cetak/rincian_biaya/view",[RincianBiayaController::class,'indexview
 route::get("/cetak/rekening_koran/urut_tangal",[RekeningKoranController::class,'index2']);
 route::get("/cetak/rekening_koran/urut_no_perkiraan",[RekeningKoranController::class,'index']);
 route::get("/cetak/memorial_pemindah_bukuan",[MemorialPemindahBukuanController::class,'index']);
+route::get("/cetak/memorial_pemindah_bukuan/view",[MemorialPemindahBukuanController::class,'indexview']);
 route::get("/cetak/memorial_saldo_awal",[MemorialSaldoAwalController::class,'index']);
+route::get("/cetak/memorial_saldo_awal/view",[MemorialSaldoAwalController::class,'indexview']);
 route::get("/cetak/laporan_management",[LaporanManagementController::class,'index']);
 
 

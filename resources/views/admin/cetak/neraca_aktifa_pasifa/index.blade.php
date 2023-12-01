@@ -13,13 +13,13 @@
         <div class="container mt-5">
             <h2 class="mb-4">Pilih Tanggal dan Tahun</h2>
         
-            <form id="myForm">
+            <form id="myForm" method="GET" action="/cetak/neraca_aktifa_pasifa">
               <div class="form-group">
                 <label for="tanggal">Tanggal:</label>
                 <input type="date" class="form-control" id="tanggal" name="tanggal" required>
               </div>
         
-              <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+              <button type="submit" class="btn btn-primary" >Submit</button>
             </form>
           </div>
        

@@ -22,6 +22,10 @@ class MemorialPemindahBukuanController extends Controller
         return $pdf->download('memorial_pemindah_bukuan.pdf');
         return view("");
     }
+    public function indexview()
+    {
+        return view("admin.cetak.memorial_pemindah_bukuan.index");
+    }
 
     /**
      * Show the form for creating a new resource.

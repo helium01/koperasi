@@ -14,7 +14,7 @@ class NeracaAktifaPasifaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $image = file_get_contents(public_path('logo.jpg'));
         $base64 = 'data:image/png;base64,' . base64_encode($image);
