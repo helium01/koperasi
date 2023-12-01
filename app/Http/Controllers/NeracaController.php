@@ -537,6 +537,10 @@ class NeracaController extends Controller
         $jumlahdatakredit=0;
         $jumlahdatadebit=0;
 
+        // dd($debit_total->count());
+        if($nomor_perkiraan->count()==0){
+            return redirect()->back();
+        }
 foreach ($nomor_perkiraan as $perkiraan) {
     // Pisahkan kode menjadi golongan (misal: "080" menjadi "00")
     $golongan = substr($perkiraan->kode, 0, 3);
@@ -576,6 +580,10 @@ foreach ($nomor_perkiraan as $perkiraan) {
             ->whereMonth('tanggal', '=', date('m', strtotime($request->tanggal))) // Filter berdasarkan bulan
             ->whereYear('tanggal', '=', date('Y', strtotime($request->tanggal)))  // Filter berdasarkan tahun
             ->sum('jumlah_uang');
+        }
+        // dd($debit_total);
+        if($debit_total==0 || $kredit_total==0){
+            return redirect()->back();
         }
    
     $totalsPerGolongan[$golongan3][$golongan2][$golongan]['details'][] = [

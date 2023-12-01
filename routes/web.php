@@ -84,8 +84,11 @@ route::get("/cetak/seluruh_kartu_bukubesar",[SeluruhKartuBukuBesarController::cl
 route::get("/cetak/neraca",[NeracaController::class,'index']);
 route::get("/cetak/neraca/view",[NeracaController::class,'indexview']);
 route::get("/cetak/neraca_aktifa_pasifa",[NeracaAktifaPasifaController::class,'index']);
+route::get("/cetak/neraca_aktifa_pasifa/view",[NeracaAktifaPasifaController::class,'indexview']);
 route::get("/cetak/neraca_lajur",[NeracaLajurController::class,'index']);
+route::get("/cetak/neraca_lajur/view",[NeracaLajurController::class,'indexview']);
 route::get("/cetak/rincian_biaya",[RincianBiayaController::class,'index']);
+route::get("/cetak/rincian_biaya/view",[RincianBiayaController::class,'indexview']);
 route::get("/cetak/rekening_koran/urut_tangal",[RekeningKoranController::class,'index2']);
 route::get("/cetak/rekening_koran/urut_no_perkiraan",[RekeningKoranController::class,'index']);
 route::get("/cetak/memorial_pemindah_bukuan",[MemorialPemindahBukuanController::class,'index']);
