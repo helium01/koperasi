@@ -588,11 +588,11 @@ foreach ($nomor_perkiraan as $perkiraan) {
         }
         // dd($debit_total);
         if($debit_total==0 || $kredit_total==0){
-            $pesan = 'tidak terdapat data yang akan di cetak tolong pilih data yang sesuai';
+            // $pesan = 'tidak terdapat data yang akan di cetak tolong pilih data yang sesuai';
 
-            // Simpan pesan ke dalam session
-            session()->flash('pesan', $pesan);
-            return redirect()->back();
+            // // Simpan pesan ke dalam session
+            // session()->flash('pesan', $pesan);
+            // return redirect()->back();
         }
    
     $totalsPerGolongan[$golongan3][$golongan2][$golongan]['details'][] = [
